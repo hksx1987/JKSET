@@ -1,0 +1,9 @@
+
+/* Class = "UILabel"; text = "规则"; ObjectID = "MkO-Bj-gzE"; */
+"MkO-Bj-gzE.text" = "SET规则：选出的3张卡中，每个属性（颜色、形状、数量、填充效果）必须满足要么都相同，要么都不同的条件。";
+
+/* Class = "UILabel"; text = "请从下面选项中找出上面缺失的SET"; ObjectID = "fbH-lz-CSp"; */
+"fbH-lz-CSp.text" = "请从下面选项中找出上面缺失的SET";
+
+/* Class = "UIButton"; normalTitle = "我学会了，点击继续"; ObjectID = "lql-Kd-LnJ"; */
+"lql-Kd-LnJ.normalTitle" = "我学会了，点击继续";

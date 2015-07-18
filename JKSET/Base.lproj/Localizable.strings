@@ -1,0 +1,48 @@
+/* 
+  Localizable.strings
+  JKSET
+
+  Created by Jack Huang on 15/7/18.
+  Copyright (c) 2015年 Jack's app for practice. All rights reserved.
+*/
+
+// JKSETJudge.m
+
+/* Color Match failed prefix message. */
+"Localized_Color" = "Color ";
+
+/* Match failed suffix message. */
+"Localized_match_failed_msg" = "- not Match!";
+
+/* Number Match failed prefix message. */
+"Localized_Number" = "Number ";
+
+/* Shading Match failed prefix message. */
+"Localized_Shading" = "Shading ";
+
+/* Symbol Match failed prefix message. */
+"Localized_Symbol" = "Symbol ";
+
+
+// JKSET - Controllers
+
+/* Game finished title */
+"Congratulation" = "Congratulation";
+
+/* Game finished button */
+"Go" = "Go";
+
+/* Card game match failed alert title */
+"Match Failed" = "Match Failed";
+
+/* Card game match failed alert button */
+"OK" = "OK";
+
+/* Traning match failed alert button */
+"OK Button" = "OK Button";
+
+/* Training match failed alert title */
+"Training Failed" = "Training Failed";
+
+/* Game finished message */
+"Try one more?" = "Try one more?";

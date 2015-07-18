@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>773D313F-FF0A-4360-B709-26C51558C6F3</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>CEB2EF75D424AF3D4D8034A728F7F3F67F6036BB</key>
+		<string>github.com:hksx1987/JKSET.git</string>
+	</dict>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>CEB2EF75D424AF3D4D8034A728F7F3F67F6036BB</key>
+		<string>JKSET/</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:hksx1987/JKSET.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>CEB2EF75D424AF3D4D8034A728F7F3F67F6036BB</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>CEB2EF75D424AF3D4D8034A728F7F3F67F6036BB</string>
+			<key>IDESourceControlWCCName</key>
+			<string>JKSET</string>
+		</dict>
+	</array>
+</dict>
+</plist>

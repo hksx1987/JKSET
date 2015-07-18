@@ -1,0 +1,577 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		32372FE41B5AA76D00C613AE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 32372FE61B5AA76D00C613AE /* Localizable.strings */; };
+		325651451B58D4AD00368643 /* JKSETJudge.m in Sources */ = {isa = PBXBuildFile; fileRef = 325651441B58D4AD00368643 /* JKSETJudge.m */; };
+		325651481B59183100368643 /* JKSETTrainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 325651471B59183100368643 /* JKSETTrainer.m */; };
+		325F3FFF1B54D788004B079E /* JKClassicSetCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 325F3FFE1B54D788004B079E /* JKClassicSetCardView.m */; };
+		325F40021B54DEE9004B079E /* JKCardMatchingGameBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = 325F40011B54DEE9004B079E /* JKCardMatchingGameBrain.m */; };
+		325F40051B55FC92004B079E /* JKCardGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 325F40041B55FC92004B079E /* JKCardGameViewController.m */; };
+		325F40081B55FDA1004B079E /* JKSETCardGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 325F40071B55FDA1004B079E /* JKSETCardGameViewController.m */; };
+		325F400C1B56618F004B079E /* CALayer+IndexPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 325F400B1B56618F004B079E /* CALayer+IndexPath.m */; };
+		325F400F1B5672EF004B079E /* JKCalculations.m in Sources */ = {isa = PBXBuildFile; fileRef = 325F400E1B5672EE004B079E /* JKCalculations.m */; };
+		32A4D1631B540501006149F3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A4D1621B540501006149F3 /* main.m */; };
+		32A4D1661B540501006149F3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A4D1651B540501006149F3 /* AppDelegate.m */; };
+		32A4D1691B540501006149F3 /* JKSETTrainingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A4D1681B540501006149F3 /* JKSETTrainingViewController.m */; };
+		32A4D16C1B540501006149F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32A4D16A1B540501006149F3 /* Main.storyboard */; };
+		32A4D16E1B540501006149F3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32A4D16D1B540501006149F3 /* Images.xcassets */; };
+		32A4D1711B540501006149F3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32A4D16F1B540501006149F3 /* LaunchScreen.xib */; };
+		32A4D17D1B540501006149F3 /* JKSETTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A4D17C1B540501006149F3 /* JKSETTests.m */; };
+		32A4D1951B540556006149F3 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A4D18C1B540556006149F3 /* Card.m */; };
+		32A4D1961B540556006149F3 /* Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A4D18E1B540556006149F3 /* Deck.m */; };
+		32A4D1971B540556006149F3 /* SETCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A4D1911B540556006149F3 /* SETCard.m */; };
+		32A4D1981B540556006149F3 /* SETDeck.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A4D1931B540556006149F3 /* SETDeck.m */; };
+		32A4D19C1B5406D4006149F3 /* JKSetCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A4D19B1B5406D4006149F3 /* JKSetCardView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		32A4D1771B540501006149F3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 32A4D1551B540501006149F3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 32A4D15C1B540501006149F3;
+			remoteInfo = JKSET;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		32372FE51B5AA76D00C613AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		32372FE71B5AA76F00C613AE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		32372FE81B5AA8FE00C613AE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		325651431B58D4AD00368643 /* JKSETJudge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKSETJudge.h; sourceTree = "<group>"; };
+		325651441B58D4AD00368643 /* JKSETJudge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKSETJudge.m; sourceTree = "<group>"; };
+		325651461B59183100368643 /* JKSETTrainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKSETTrainer.h; sourceTree = "<group>"; };
+		325651471B59183100368643 /* JKSETTrainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKSETTrainer.m; sourceTree = "<group>"; };
+		325F3FFD1B54D788004B079E /* JKClassicSetCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JKClassicSetCardView.h; path = Views/JKClassicSetCardView.h; sourceTree = "<group>"; };
+		325F3FFE1B54D788004B079E /* JKClassicSetCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JKClassicSetCardView.m; path = Views/JKClassicSetCardView.m; sourceTree = "<group>"; };
+		325F40001B54DEE9004B079E /* JKCardMatchingGameBrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKCardMatchingGameBrain.h; sourceTree = "<group>"; };
+		325F40011B54DEE9004B079E /* JKCardMatchingGameBrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKCardMatchingGameBrain.m; sourceTree = "<group>"; };
+		325F40031B55FC92004B079E /* JKCardGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKCardGameViewController.h; sourceTree = "<group>"; };
+		325F40041B55FC92004B079E /* JKCardGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKCardGameViewController.m; sourceTree = "<group>"; };
+		325F40061B55FDA1004B079E /* JKSETCardGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKSETCardGameViewController.h; sourceTree = "<group>"; };
+		325F40071B55FDA1004B079E /* JKSETCardGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKSETCardGameViewController.m; sourceTree = "<group>"; };
+		325F400A1B56618F004B079E /* CALayer+IndexPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CALayer+IndexPath.h"; path = "Views/CALayer+IndexPath.h"; sourceTree = "<group>"; };
+		325F400B1B56618F004B079E /* CALayer+IndexPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CALayer+IndexPath.m"; path = "Views/CALayer+IndexPath.m"; sourceTree = "<group>"; };
+		325F400D1B5672EE004B079E /* JKCalculations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JKCalculations.h; path = Views/JKCalculations.h; sourceTree = "<group>"; };
+		325F400E1B5672EE004B079E /* JKCalculations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JKCalculations.m; path = Views/JKCalculations.m; sourceTree = "<group>"; };
+		32A4D15D1B540501006149F3 /* JKSET.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JKSET.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		32A4D1611B540501006149F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		32A4D1621B540501006149F3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		32A4D1641B540501006149F3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		32A4D1651B540501006149F3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		32A4D1671B540501006149F3 /* JKSETTrainingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JKSETTrainingViewController.h; sourceTree = "<group>"; };
+		32A4D1681B540501006149F3 /* JKSETTrainingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JKSETTrainingViewController.m; sourceTree = "<group>"; };
+		32A4D16B1B540501006149F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		32A4D16D1B540501006149F3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		32A4D1701B540501006149F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		32A4D1761B540501006149F3 /* JKSETTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JKSETTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		32A4D17B1B540501006149F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		32A4D17C1B540501006149F3 /* JKSETTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JKSETTests.m; sourceTree = "<group>"; };
+		32A4D18B1B540556006149F3 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
+		32A4D18C1B540556006149F3 /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
+		32A4D18D1B540556006149F3 /* Deck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Deck.h; sourceTree = "<group>"; };
+		32A4D18E1B540556006149F3 /* Deck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Deck.m; sourceTree = "<group>"; };
+		32A4D1901B540556006149F3 /* SETCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SETCard.h; sourceTree = "<group>"; };
+		32A4D1911B540556006149F3 /* SETCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SETCard.m; sourceTree = "<group>"; };
+		32A4D1921B540556006149F3 /* SETDeck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SETDeck.h; sourceTree = "<group>"; };
+		32A4D1931B540556006149F3 /* SETDeck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SETDeck.m; sourceTree = "<group>"; };
+		32A4D19A1B5406D4006149F3 /* JKSetCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JKSetCardView.h; path = Views/JKSetCardView.h; sourceTree = "<group>"; };
+		32A4D19B1B5406D4006149F3 /* JKSetCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JKSetCardView.m; path = Views/JKSetCardView.m; sourceTree = "<group>"; };
+		32A4D19F1B5408CF006149F3 /* SETCardComponents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SETCardComponents.h; sourceTree = "<group>"; };
+		32FBE2AB1B5A7C2900CE85F1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		32FBE2AC1B5A7C2900CE85F1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		32A4D15A1B540501006149F3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		32A4D1731B540501006149F3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		32A4D1541B540501006149F3 = {
+			isa = PBXGroup;
+			children = (
+				32A4D15F1B540501006149F3 /* JKSET */,
+				32A4D1791B540501006149F3 /* JKSETTests */,
+				32A4D15E1B540501006149F3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		32A4D15E1B540501006149F3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				32A4D15D1B540501006149F3 /* JKSET.app */,
+				32A4D1761B540501006149F3 /* JKSETTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		32A4D15F1B540501006149F3 /* JKSET */ = {
+			isa = PBXGroup;
+			children = (
+				32A4D1641B540501006149F3 /* AppDelegate.h */,
+				32A4D1651B540501006149F3 /* AppDelegate.m */,
+				32A4D19D1B5406D8006149F3 /* Views */,
+				32A4D1991B5405FB006149F3 /* Controllers */,
+				32A4D18A1B540556006149F3 /* CardMatchModel */,
+				32A4D16A1B540501006149F3 /* Main.storyboard */,
+				32A4D16D1B540501006149F3 /* Images.xcassets */,
+				32A4D16F1B540501006149F3 /* LaunchScreen.xib */,
+				32A4D1601B540501006149F3 /* Supporting Files */,
+			);
+			path = JKSET;
+			sourceTree = "<group>";
+		};
+		32A4D1601B540501006149F3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				32A4D1611B540501006149F3 /* Info.plist */,
+				32A4D1621B540501006149F3 /* main.m */,
+				32372FE61B5AA76D00C613AE /* Localizable.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		32A4D1791B540501006149F3 /* JKSETTests */ = {
+			isa = PBXGroup;
+			children = (
+				32A4D17C1B540501006149F3 /* JKSETTests.m */,
+				32A4D17A1B540501006149F3 /* Supporting Files */,
+			);
+			path = JKSETTests;
+			sourceTree = "<group>";
+		};
+		32A4D17A1B540501006149F3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				32A4D17B1B540501006149F3 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		32A4D18A1B540556006149F3 /* CardMatchModel */ = {
+			isa = PBXGroup;
+			children = (
+				325F40001B54DEE9004B079E /* JKCardMatchingGameBrain.h */,
+				325F40011B54DEE9004B079E /* JKCardMatchingGameBrain.m */,
+				32A4D18B1B540556006149F3 /* Card.h */,
+				32A4D18C1B540556006149F3 /* Card.m */,
+				32A4D18D1B540556006149F3 /* Deck.h */,
+				32A4D18E1B540556006149F3 /* Deck.m */,
+				32A4D18F1B540556006149F3 /* SETModel */,
+			);
+			name = CardMatchModel;
+			path = Models/CardMatchModel;
+			sourceTree = "<group>";
+		};
+		32A4D18F1B540556006149F3 /* SETModel */ = {
+			isa = PBXGroup;
+			children = (
+				32A4D1901B540556006149F3 /* SETCard.h */,
+				32A4D1911B540556006149F3 /* SETCard.m */,
+				32A4D1921B540556006149F3 /* SETDeck.h */,
+				32A4D1931B540556006149F3 /* SETDeck.m */,
+				32A4D19F1B5408CF006149F3 /* SETCardComponents.h */,
+				325651431B58D4AD00368643 /* JKSETJudge.h */,
+				325651441B58D4AD00368643 /* JKSETJudge.m */,
+				325651461B59183100368643 /* JKSETTrainer.h */,
+				325651471B59183100368643 /* JKSETTrainer.m */,
+			);
+			path = SETModel;
+			sourceTree = "<group>";
+		};
+		32A4D1991B5405FB006149F3 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				32A4D1671B540501006149F3 /* JKSETTrainingViewController.h */,
+				32A4D1681B540501006149F3 /* JKSETTrainingViewController.m */,
+				325F40031B55FC92004B079E /* JKCardGameViewController.h */,
+				325F40041B55FC92004B079E /* JKCardGameViewController.m */,
+				325F40061B55FDA1004B079E /* JKSETCardGameViewController.h */,
+				325F40071B55FDA1004B079E /* JKSETCardGameViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		32A4D19D1B5406D8006149F3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				32A4D19A1B5406D4006149F3 /* JKSetCardView.h */,
+				32A4D19B1B5406D4006149F3 /* JKSetCardView.m */,
+				325F3FFD1B54D788004B079E /* JKClassicSetCardView.h */,
+				325F3FFE1B54D788004B079E /* JKClassicSetCardView.m */,
+				325F400A1B56618F004B079E /* CALayer+IndexPath.h */,
+				325F400B1B56618F004B079E /* CALayer+IndexPath.m */,
+				325F400D1B5672EE004B079E /* JKCalculations.h */,
+				325F400E1B5672EE004B079E /* JKCalculations.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		32A4D15C1B540501006149F3 /* JKSET */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 32A4D1801B540501006149F3 /* Build configuration list for PBXNativeTarget "JKSET" */;
+			buildPhases = (
+				32A4D1591B540501006149F3 /* Sources */,
+				32A4D15A1B540501006149F3 /* Frameworks */,
+				32A4D15B1B540501006149F3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JKSET;
+			productName = JKSET;
+			productReference = 32A4D15D1B540501006149F3 /* JKSET.app */;
+			productType = "com.apple.product-type.application";
+		};
+		32A4D1751B540501006149F3 /* JKSETTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 32A4D1831B540501006149F3 /* Build configuration list for PBXNativeTarget "JKSETTests" */;
+			buildPhases = (
+				32A4D1721B540501006149F3 /* Sources */,
+				32A4D1731B540501006149F3 /* Frameworks */,
+				32A4D1741B540501006149F3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				32A4D1781B540501006149F3 /* PBXTargetDependency */,
+			);
+			name = JKSETTests;
+			productName = JKSETTests;
+			productReference = 32A4D1761B540501006149F3 /* JKSETTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		32A4D1551B540501006149F3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = "Jack's app for practice";
+				TargetAttributes = {
+					32A4D15C1B540501006149F3 = {
+						CreatedOnToolsVersion = 6.2;
+					};
+					32A4D1751B540501006149F3 = {
+						CreatedOnToolsVersion = 6.2;
+						TestTargetID = 32A4D15C1B540501006149F3;
+					};
+				};
+			};
+			buildConfigurationList = 32A4D1581B540501006149F3 /* Build configuration list for PBXProject "JKSET" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				"zh-Hans",
+			);
+			mainGroup = 32A4D1541B540501006149F3;
+			productRefGroup = 32A4D15E1B540501006149F3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				32A4D15C1B540501006149F3 /* JKSET */,
+				32A4D1751B540501006149F3 /* JKSETTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		32A4D15B1B540501006149F3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32A4D16C1B540501006149F3 /* Main.storyboard in Resources */,
+				32372FE41B5AA76D00C613AE /* Localizable.strings in Resources */,
+				32A4D1711B540501006149F3 /* LaunchScreen.xib in Resources */,
+				32A4D16E1B540501006149F3 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		32A4D1741B540501006149F3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		32A4D1591B540501006149F3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				325F40081B55FDA1004B079E /* JKSETCardGameViewController.m in Sources */,
+				325F40051B55FC92004B079E /* JKCardGameViewController.m in Sources */,
+				32A4D19C1B5406D4006149F3 /* JKSetCardView.m in Sources */,
+				325F3FFF1B54D788004B079E /* JKClassicSetCardView.m in Sources */,
+				32A4D1971B540556006149F3 /* SETCard.m in Sources */,
+				32A4D1951B540556006149F3 /* Card.m in Sources */,
+				32A4D1691B540501006149F3 /* JKSETTrainingViewController.m in Sources */,
+				325F400F1B5672EF004B079E /* JKCalculations.m in Sources */,
+				32A4D1661B540501006149F3 /* AppDelegate.m in Sources */,
+				32A4D1631B540501006149F3 /* main.m in Sources */,
+				32A4D1961B540556006149F3 /* Deck.m in Sources */,
+				325F400C1B56618F004B079E /* CALayer+IndexPath.m in Sources */,
+				325F40021B54DEE9004B079E /* JKCardMatchingGameBrain.m in Sources */,
+				325651451B58D4AD00368643 /* JKSETJudge.m in Sources */,
+				32A4D1981B540556006149F3 /* SETDeck.m in Sources */,
+				325651481B59183100368643 /* JKSETTrainer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		32A4D1721B540501006149F3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32A4D17D1B540501006149F3 /* JKSETTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		32A4D1781B540501006149F3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 32A4D15C1B540501006149F3 /* JKSET */;
+			targetProxy = 32A4D1771B540501006149F3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		32372FE61B5AA76D00C613AE /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				32372FE51B5AA76D00C613AE /* Base */,
+				32372FE71B5AA76F00C613AE /* zh-Hans */,
+				32372FE81B5AA8FE00C613AE /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		32A4D16A1B540501006149F3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				32A4D16B1B540501006149F3 /* Base */,
+				32FBE2AB1B5A7C2900CE85F1 /* zh-Hans */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		32A4D16F1B540501006149F3 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				32A4D1701B540501006149F3 /* Base */,
+				32FBE2AC1B5A7C2900CE85F1 /* zh-Hans */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		32A4D17E1B540501006149F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		32A4D17F1B540501006149F3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		32A4D1811B540501006149F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				INFOPLIST_FILE = JKSET/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-unused-parameter",
+				);
+			};
+			name = Debug;
+		};
+		32A4D1821B540501006149F3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				INFOPLIST_FILE = JKSET/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-unused-parameter",
+				);
+			};
+			name = Release;
+		};
+		32A4D1841B540501006149F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = JKSETTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JKSET.app/JKSET";
+			};
+			name = Debug;
+		};
+		32A4D1851B540501006149F3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = JKSETTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JKSET.app/JKSET";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		32A4D1581B540501006149F3 /* Build configuration list for PBXProject "JKSET" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				32A4D17E1B540501006149F3 /* Debug */,
+				32A4D17F1B540501006149F3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		32A4D1801B540501006149F3 /* Build configuration list for PBXNativeTarget "JKSET" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				32A4D1811B540501006149F3 /* Debug */,
+				32A4D1821B540501006149F3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		32A4D1831B540501006149F3 /* Build configuration list for PBXNativeTarget "JKSETTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				32A4D1841B540501006149F3 /* Debug */,
+				32A4D1851B540501006149F3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 32A4D1551B540501006149F3 /* Project object */;
+}
