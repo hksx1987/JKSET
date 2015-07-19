@@ -15,8 +15,6 @@
 
 @implementation JKSETJudge
 
-char suggestedValue(char v1, char v2);
-
 - (instancetype)init
 {
     self = [super init];
@@ -82,19 +80,3 @@ char suggestedValue(char v1, char v2);
 }
 
 @end
-
-char suggestedValue(char v1, char v2)
-{
-    if (v1 == v2) {
-        return v1;
-    } else {
-        char values[3] = { SETFirstValue, SETSecondValue, SETThirdValue };
-        for (NSUInteger i = 0; i <= 2; i++) {
-            char value = values[i];
-            if (value != v1 && value != v2) {
-                return value;
-            }
-        }
-    }
-    return SETNoneValue;
-}
