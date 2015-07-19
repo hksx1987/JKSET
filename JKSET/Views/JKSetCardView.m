@@ -192,7 +192,7 @@ static CGRect three_right_rect; // ...
     return symbolPath;
 }
 
-// create several rect for drawing symbol
+// create several rects for drawing symbol
 // it depends on the number value
 - (NSArray *)symbolRects
 {

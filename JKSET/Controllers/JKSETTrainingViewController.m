@@ -55,6 +55,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+// Here we need 5 cards and a blank card to be displayed in
+// JKSETTrainingViewController, so I decided using index to
+// place them. 3 cards (includes the blank card) above the
+// center of screen are waited to be a SET. Another 3 cards
+// which below the center of screen are options. One of them
+// is the correct answer to choose.
+// The most upper left card of 6 has the index 0, and index 1
+// for next, ..., the most bottom right card has index 5.
 - (void)setupCardViews
 {
     // setup cards

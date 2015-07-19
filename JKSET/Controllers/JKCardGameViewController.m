@@ -82,7 +82,8 @@ static NSString * const reuseIdentifier = @"Cell";
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     // Very important to clean up the contents of cell before reuse it!!
-    // Otherwise the memory usage will go up fast.
+    // Otherwise the memory usage will go up fast, because the cell stayed
+    // in the reuse queue will not clean up it's contentView automatically.
     UIView *cardView = [cell.contentView.subviews lastObject];
     [cardView removeFromSuperview];
     

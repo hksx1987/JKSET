@@ -11,6 +11,8 @@
 
 
 @protocol JKSETJudgeDelegate <NSObject>
+// Receiving the miss-match description
+// e.g. "Color is not match."
 - (void)judge:(JKSETJudge *)judge didReceiveMatchFailureDescription:(NSString *)failureDescription;
 @end
 
@@ -19,7 +21,7 @@
 
 @property (nonatomic, assign) id <JKSETJudgeDelegate> delegate;
 
-/*! Select a card and wait for delegate callback about failure match description.
+/*! Select a card and wait for delegate callback about miss-match description.
  * \param card The card you've chosen.
  * \returns The BOOL value indicates match success or failure.
  */
