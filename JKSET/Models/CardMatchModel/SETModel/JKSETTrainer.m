@@ -10,8 +10,8 @@
 #import "SETCard.h"
 
 @interface JKSETTrainer()
-@property (nonatomic, retain) NSMutableArray *selectedCards; // candidates
-@property (nonatomic, retain) SETCard *missingCard;
+@property (nonatomic, retain) NSMutableArray *candidates; // array of 2 cards for SET candidates
+@property (nonatomic, retain) SETCard *missingCard; // One missing SET card
 @end
 
 @implementation JKSETTrainer
@@ -22,7 +22,7 @@ char suggestedValue(char v1, char v2);
 {
     self = [super init];
     if (self) {
-        _selectedCards = [[NSMutableArray alloc] init];
+        _candidates = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -30,7 +30,7 @@ char suggestedValue(char v1, char v2);
 - (void)dealloc
 {
     NSLog(@"JKSETTrainer deallocated");
-    [_selectedCards release];
+    [_candidates release];
     [_missingCard release];
     [super dealloc];
 }
@@ -39,22 +39,22 @@ char suggestedValue(char v1, char v2);
 
 - (void)preSetupCards
 {
-    [self.selectedCards removeAllObjects];
+    [self.candidates removeAllObjects];
     self.missingCard = nil;
     
-    while (self.selectedCards.count < 2) {
+    while (self.candidates.count < 2) {
         SETCard *card = [self randomCard];
-        if (![self.selectedCards containsObject:card]) {
-            [self.selectedCards addObject:card];
+        if (![self.candidates containsObject:card]) {
+            [self.candidates addObject:card];
         }
     }
     
-    self.missingCard = [self suggestedCardForCards:self.selectedCards];
+    self.missingCard = [self suggestedCardForCards:self.candidates];
 }
 
 - (NSArray *)candidateCards
 {
-    return [[self.selectedCards copy] autorelease];
+    return [[self.candidates copy] autorelease];
 }
 
 - (NSArray *)optionalCardsWithCount:(NSUInteger)count
@@ -68,7 +68,7 @@ char suggestedValue(char v1, char v2);
     while (options.count < count-1) {
         SETCard *card = [self randomCard];
         if (![options containsObject:card] &&
-            ![self.selectedCards containsObject:card] &&
+            ![self.candidates containsObject:card] &&
             ![self.missingCard isEqual:card]) {
             [options addObject:card];
         }
