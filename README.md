@@ -1,5 +1,8 @@
 # JKSET
-The iOS SET game demo (not complete version).
+The iOS SET game demo (not complete version). For more information of SET, please check out:
+wikipedia(SET game) - https://en.wikipedia.org/wiki/Set_(game)
+百度百科（SET纸牌）- http://baike.baidu.com/view/2024040.htm
+百度百科（SET神奇形色牌）- http://baike.baidu.com/view/3989582.htm
 
 This is a iOS version of SET game demo for showing what this game is and how to play it. Most importantly, it is the demo for showing the Objective C programming language.
 
