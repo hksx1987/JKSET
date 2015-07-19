@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SETCardComponents.h"
 @class SETCard;
 
 /* Abstract class */

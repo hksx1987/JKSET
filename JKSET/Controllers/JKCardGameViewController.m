@@ -179,12 +179,10 @@ static NSString * const reuseIdentifier = @"Cell";
     UIBezierPath *cardPath = [UIBezierPath bezierPathWithRoundedRect:cardFrame cornerRadius:cornerRadius];
     CAShapeLayer *frameLayer = [CAShapeLayer layer];
     frameLayer.path = cardPath.CGPath;
-    // set lineWidth directly to layer, because set path.lineWidth is useless
-    frameLayer.lineWidth = 4.0;
+    frameLayer.lineWidth = 4.0; // set lineWidth directly to layer, because set path.lineWidth is useless
     frameLayer.fillColor = nil;
     frameLayer.strokeColor = [[UIColor orangeColor] CGColor];
-    // connect layer with indexPath
-    frameLayer.associatedIndexPath = indexPath;
+    frameLayer.associatedIndexPath = indexPath; // connect layer with indexPath
     
     [self.collectionView.layer addSublayer:frameLayer];
 }
@@ -198,6 +196,7 @@ static NSString * const reuseIdentifier = @"Cell";
     [sublayers enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(CALayer *sublayer, NSUInteger idx, BOOL *stop) {
         if ([sublayer isKindOfClass:[CAShapeLayer class]]) {
             if (sublayer.associatedIndexPath == indexPath) {
+                sublayer.associatedIndexPath = nil;
                 frameLayer = sublayer;
                 *stop = YES;
             }
@@ -216,6 +215,7 @@ static NSString * const reuseIdentifier = @"Cell";
     for (NSUInteger i = 0; i < sublayers.count; i++) {
         CALayer *sublayer = sublayers[i];
         if ([sublayer isKindOfClass:[CAShapeLayer class]]) {
+            sublayer.associatedIndexPath = nil;
             [sublayer removeFromSuperlayer];
         }
     }

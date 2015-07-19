@@ -10,6 +10,6 @@
 
 @interface CALayer (IndexPath)
 
-@property (nonatomic, assign) NSIndexPath *associatedIndexPath;
+@property (nonatomic, retain) NSIndexPath *associatedIndexPath;
 
 @end

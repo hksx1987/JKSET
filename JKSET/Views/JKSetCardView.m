@@ -120,7 +120,8 @@ static CGRect three_right_rect; // ...
     [cardPath addClip];
     [cardPath fill];
     
-    // check if it has a zero value
+    // check if it has a zero value, if has,
+    // then draw a blank card with "?" mark
     if ([self isIncompleteComponents]) {
         [self drawBlankCardInRect:rect];
         return;
@@ -130,13 +131,13 @@ static CGRect three_right_rect; // ...
     UIColor *symbolColor = [self symbolColor];
     [symbolColor set];
     
-    // set all rects to draw symbol
+    // set all small rects to draw symbol
     NSArray *symbolRects = [self symbolRects];
     if (!symbolRects) {
         return;
     }
     
-    // draw symbol in each rect
+    // draw symbol in each small rect
     for (NSValue *rectObj in symbolRects) {
         CGRect rectValue = [rectObj CGRectValue];
         UIBezierPath *symbolPath = [self symbolPathInRect:rectValue];
@@ -147,6 +148,9 @@ static CGRect three_right_rect; // ...
 
 #pragma mark - helper
 
+// return a rect which contains a single symbol pattern
+// to draw inside of card. For this demo, there can be
+// 5 rects depends on the center parameter
 - (CGRect)symbolRactAtCenter:(CGPoint)center
 {
     CGFloat card_width = CGRectGetWidth(self.bounds);
@@ -188,6 +192,8 @@ static CGRect three_right_rect; // ...
     return symbolPath;
 }
 
+// create several rect for drawing symbol
+// it depends on the number value
 - (NSArray *)symbolRects
 {
     NSArray *symbolRects = nil;
@@ -206,6 +212,8 @@ static CGRect three_right_rect; // ...
     return symbolRects;
 }
 
+// draw symbol with different effects which depended on the shading value
+// there are 3 effects: outlined(stroke), solid(filled), striped
 - (void)drawSymbolPath:(UIBezierPath *)symbolPath inRect:(CGRect)rect
 {
     if (self.card.shading == SETFirstValue) {

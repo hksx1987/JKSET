@@ -12,16 +12,16 @@
 @implementation CALayer (IndexPath)
 @dynamic associatedIndexPath;
 
-const void * kCALayerIdentifier = &kCALayerIdentifier;
+const void * kCALayerLocationKey;
 
 - (void)setAssociatedIndexPath:(NSIndexPath *)indexPath
 {
-    objc_setAssociatedObject(self, kCALayerIdentifier, indexPath, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, &kCALayerLocationKey, indexPath, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (NSIndexPath *)associatedIndexPath
 {
-    return objc_getAssociatedObject(self, kCALayerIdentifier);
+    return objc_getAssociatedObject(self, &kCALayerLocationKey);
 }
 
 @end

@@ -6,29 +6,33 @@
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>773D313F-FF0A-4360-B709-26C51558C6F3</string>
+	<key>IDESourceControlProjectName</key>
+	<string>JKSET</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>CEB2EF75D424AF3D4D8034A728F7F3F67F6036BB</key>
+		<key>F52EE45CFD8801DF16BC1BC5DAF5D232BAE3E253</key>
 		<string>github.com:hksx1987/JKSET.git</string>
 	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>JKSET.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>CEB2EF75D424AF3D4D8034A728F7F3F67F6036BB</key>
-		<string>JKSET/</string>
+		<key>F52EE45CFD8801DF16BC1BC5DAF5D232BAE3E253</key>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>github.com:hksx1987/JKSET.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>CEB2EF75D424AF3D4D8034A728F7F3F67F6036BB</string>
+	<string>F52EE45CFD8801DF16BC1BC5DAF5D232BAE3E253</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>CEB2EF75D424AF3D4D8034A728F7F3F67F6036BB</string>
+			<string>F52EE45CFD8801DF16BC1BC5DAF5D232BAE3E253</string>
 			<key>IDESourceControlWCCName</key>
 			<string>JKSET</string>
 		</dict>
