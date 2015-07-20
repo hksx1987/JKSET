@@ -133,9 +133,7 @@ static NSString * const reuseIdentifier = @"Cell";
 {
     [self removeSelectionLayerAtIndexPath:indexPath];
     Card *card = [self.gameBrain cardAtIndex:indexPath.row];
-    // Same API deals with both for choosing and unchoosing the card.
-    // If you choose the chosen card, it will unchoose it.
-    [self.gameBrain chooseCard:card];
+    [self.gameBrain unchooseCard:card];
     [self didChooseCard:card];
 }
 

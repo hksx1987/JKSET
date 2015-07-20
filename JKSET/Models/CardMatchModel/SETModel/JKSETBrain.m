@@ -62,7 +62,7 @@
                         
                         if (c3 != c1 && c3 != c2) {
                             if ([sc isEqual:c3]) {
-                                NSSet *set = [NSSet setWithObjects:c1, c2, c3, nil];
+                                NSSet *set = [NSSet setWithObjects:@(i), @(j), @(m), nil];
                                 [sets addObject:set];
                                 break;
                             }

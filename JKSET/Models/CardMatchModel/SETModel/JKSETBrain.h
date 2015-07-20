@@ -10,7 +10,7 @@
 
 @interface JKSETBrain : JKCardMatchingGameBrain
 
-// An array of NSSET objects which contains 3 matched cards.
+// An array of NSSET objects which contains 3 indexes of matched cards.
 @property (nonatomic, readonly) NSArray *possibleSETs;
 
 // Every time call this method, the brain will make a big calculation.

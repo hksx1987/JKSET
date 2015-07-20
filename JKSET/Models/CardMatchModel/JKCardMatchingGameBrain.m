@@ -129,6 +129,13 @@
     }
 }
 
+- (void)unchooseCard:(Card *)card
+{
+    // Same API deals with both for choosing and unchoosing the card.
+    // If you choose the chosen card, it will unchoose it.
+    [self chooseCard:card];
+}
+
 - (void)removeCards:(NSArray *)cards
 {
     [self.cards removeObjectsInArray:cards];
@@ -140,6 +147,14 @@
 - (Card *)cardAtIndex:(NSUInteger)index
 {
     return self.cards[index];
+}
+
+- (void)cleanAllSelections
+{
+    for (Card *card in self.cards) {
+        card.isChosen = NO;
+    }
+    [self.chosenCards removeAllObjects];
 }
 
 #pragma mark - helper

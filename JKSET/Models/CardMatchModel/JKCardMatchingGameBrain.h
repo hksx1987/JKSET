@@ -32,9 +32,12 @@
           requiredMatchCount:(NSUInteger)matchCount; // number of cards for a match
 
 - (void)chooseCard:(Card *)card;
+- (void)unchooseCard:(Card *)card;
 - (void)removeCards:(NSArray *)cards;
 - (Card *)cardAtIndex:(NSUInteger)index; // get a card for displaying (or displayed) on screen
 
 - (void)startNewGameWithNewDeck:(Deck *)deck;
+- (void)cleanAllSelections; // clean all selected cards.
+
 
 @end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dWD-We-YHe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="lCp-EZ-WGb">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
@@ -74,7 +74,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="100" y="359"/>
+            <point key="canvasLocation" x="-84" y="325"/>
         </scene>
         <!--Card Game View Controller-->
         <scene sceneID="50h-Gb-axn">
@@ -96,10 +96,35 @@
                             <outlet property="delegate" destination="dWD-We-YHe" id="io8-hy-qrG"/>
                         </connections>
                     </collectionView>
+                    <navigationItem key="navigationItem" id="Uuc-sv-mlS">
+                        <barButtonItem key="rightBarButtonItem" title="Hints" id="JZe-Zg-elm">
+                            <connections>
+                                <action selector="pressHintButton:" destination="dWD-We-YHe" id="p5P-7b-oGn"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aci-Jn-yVt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="934" y="365"/>
+            <point key="canvasLocation" x="1440" y="325"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="LOT-Q6-NXr">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lCp-EZ-WGb" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tnh-ci-nhs">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="dWD-We-YHe" kind="relationship" relationship="rootViewController" id="n8F-OR-DZ8"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F2g-EE-S7C" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="678" y="325"/>
         </scene>
     </scenes>
 </document>

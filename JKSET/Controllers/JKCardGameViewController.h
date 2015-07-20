@@ -27,4 +27,11 @@
 // subclass can override this to provide a subclass of JKCardMatchingGameBrain
 - (JKCardMatchingGameBrain *)brainForGame;
 
+
+// Draw or remove selection layers
+- (void)drawSelectionLayerAtIndexPath:(NSIndexPath *)indexPath;
+- (void)removeSelectionLayerAtIndexPath:(NSIndexPath *)indexPath;
+- (void)removeAllSelectionLayer;
+
+
 @end

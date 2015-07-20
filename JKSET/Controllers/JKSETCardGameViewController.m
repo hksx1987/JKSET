@@ -87,7 +87,24 @@
 
 - (IBAction)pressHintButton:(UIBarButtonItem *)sender
 {
+    JKSETBrain *brain = (JKSETBrain *)self.gameBrain;
     
+    // clean all selections
+    [self removeAllSelectionLayer];
+    [brain cleanAllSelections];
+    
+    // choose suggested cards
+    NSArray *possibleSETs = brain.possibleSETs;
+    NSUInteger randomIndex = arc4random_uniform(possibleSETs.count);
+    NSArray *possibleSET = ((NSSet *)possibleSETs[randomIndex]).allObjects;
+    
+    for (NSInteger i = 0; i < 2; ++i) {
+        NSInteger indexValue = [possibleSET[i] integerValue];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:indexValue inSection:0];
+        [self drawSelectionLayerAtIndexPath:indexPath];
+        Card *card = [brain cardAtIndex:indexValue];
+        [brain chooseCard:card];
+    }
 }
 
 #pragma mark - helper
