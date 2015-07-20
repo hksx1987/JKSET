@@ -95,6 +95,72 @@ bool matchValue(char v1, char v2, char v3);
     return self.color == SETNoneValue || self.symbol == SETNoneValue || self.number == SETNoneValue || self.shading == SETNoneValue;
 }
 
+// This debugDescription will print out the classic SET card description,
+// which should be the subclass's responsibility. I just don't feel like to
+// make a subclass again to handle this.
+- (NSString *)debugDescription
+{
+    return [NSString stringWithFormat:@"SETCard(%@_%@_%@_%@)", [self defaultNumberDescription], [self defaultShadingDescription], [self defaultColorDescription], [self defaultSymbolDescription]];
+}
+
+#pragma mark - helper
+
+- (NSString *)defaultSymbolDescription
+{
+    switch (self.symbol) {
+        case SETFirstValue:
+            return @"diamond";
+        case SETSecondValue:
+            return @"squiggle";
+        case SETThirdValue:
+            return @"oval";
+        case SETNoneValue:
+            return @"?";
+    }
+}
+
+- (NSString *)defaultColorDescription
+{
+    switch (self.color) {
+        case SETFirstValue:
+            return @"red";
+        case SETSecondValue:
+            return @"green";
+        case SETThirdValue:
+            return @"purple";
+        case SETNoneValue:
+            return @"?";
+    }
+}
+
+- (NSString *)defaultNumberDescription
+{
+    switch (self.number) {
+        case SETFirstValue:
+            return @"One";
+        case SETSecondValue:
+            return @"Two";
+        case SETThirdValue:
+            return @"Three";
+        case SETNoneValue:
+            return @"?";
+    }
+}
+
+- (NSString *)defaultShadingDescription
+{
+    switch (self.shading) {
+        case SETFirstValue:
+            return @"outlined";
+        case SETSecondValue:
+            return @"solid";
+        case SETThirdValue:
+            return @"striped";
+        case SETNoneValue:
+            return @"?";
+    }
+}
+
 @end
 
 bool matchValue(char v1, char v2, char v3)
