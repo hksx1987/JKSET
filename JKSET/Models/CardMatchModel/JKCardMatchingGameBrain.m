@@ -157,6 +157,11 @@
     [self.chosenCards removeAllObjects];
 }
 
+- (NSUInteger)indexOfCard:(Card *)card
+{
+    return [self.cards indexOfObject:card];
+}
+
 #pragma mark - helper
 
 - (void)startNewGameWithNewDeck:(Deck *)deck

@@ -79,4 +79,14 @@
     }
 }
 
+- (void)unchooseCard:(SETCard *)card
+{
+    [self chooseCard:card];
+}
+
+- (void)cleanAllSelections
+{
+    [self.chosenCards removeAllObjects];
+}
+
 @end

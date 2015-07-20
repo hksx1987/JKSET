@@ -46,3 +46,6 @@
 
 /* Game finished message */
 "Try one more?" = "Try one more?";
+
+/* Showing { number } of possible SETs */
+"Remains: %lu combinations" = "Remains: %lu combinations";

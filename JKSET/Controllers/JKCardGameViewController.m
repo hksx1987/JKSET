@@ -123,6 +123,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self removeSelectionLayerAtIndexPath:indexPath];
     [self drawSelectionLayerAtIndexPath:indexPath];
     Card *card = [self.gameBrain cardAtIndex:indexPath.row];
     [self.gameBrain chooseCard:card];
@@ -143,9 +144,19 @@ static NSString * const reuseIdentifier = @"Cell";
 {
     [self removeAllSelectionLayer];
     
+    // use [self.collectionView indexPathsForSelectedItems] is not safe, because in some cases,
+    // cards are selected programmatically. (Unless you call selectItemAtIndexPath: and
+    // deleteItemsAtIndexPaths: manually to sync with it.)
+    // ps: call selectItemAtIndexPath: manually will not trigger the didSelect... delegate method!
+    NSMutableArray *indexPaths = [NSMutableArray array];
+    for (Card *card in cards) {
+        NSUInteger i = [self.gameBrain indexOfCard:card];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
+        [indexPaths addObject:indexPath];
+    }
+    
     [self.collectionView performBatchUpdates:^{
         [self.gameBrain removeCards:cards];
-        NSArray *indexPaths = [self.collectionView indexPathsForSelectedItems];
         [self.collectionView deleteItemsAtIndexPaths:indexPaths];
     } completion:^(BOOL finished) {
         if (finished) {
@@ -177,6 +188,7 @@ static NSString * const reuseIdentifier = @"Cell";
         Deck *deck = [self deckForGame];
         [self.gameBrain startNewGameWithNewDeck:deck];
         [self.collectionView reloadData];
+        [self didRestartGame];
     }];
     [alert addAction:go];
     [self presentViewController:alert animated:YES completion:nil];
@@ -209,7 +221,7 @@ static NSString * const reuseIdentifier = @"Cell";
     
     [sublayers enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(CALayer *sublayer, NSUInteger idx, BOOL *stop) {
         if ([sublayer isKindOfClass:[CAShapeLayer class]]) {
-            if (sublayer.associatedIndexPath == indexPath) {
+            if ([sublayer.associatedIndexPath isEqual:indexPath]) {
                 sublayer.associatedIndexPath = nil;
                 frameLayer = sublayer;
                 *stop = YES;
@@ -261,5 +273,6 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)didChooseCard:(Card *)card {}
 - (void)didFindAMatch {}
 - (void)didFailAMatch {}
+- (void)didRestartGame {}
 
 @end

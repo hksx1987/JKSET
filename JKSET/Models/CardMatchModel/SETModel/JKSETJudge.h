@@ -27,4 +27,7 @@
  */
 - (BOOL)chooseCard:(SETCard *)card;
 
+- (void)unchooseCard:(SETCard *)card;
+- (void)cleanAllSelections;
+
 @end

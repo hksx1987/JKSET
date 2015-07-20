@@ -23,6 +23,7 @@
 - (void)didChooseCard:(Card *)card;
 - (void)didFindAMatch;
 - (void)didFailAMatch;
+- (void)didRestartGame;
 
 // subclass can override this to provide a subclass of JKCardMatchingGameBrain
 - (JKCardMatchingGameBrain *)brainForGame;

@@ -12,7 +12,7 @@
 
 
 @protocol JKCardMatchingGameBrainDelegate <NSObject>;
-- (void)cardMatchingGameBrain:(JKCardMatchingGameBrain *)gameBrain didFindAMatchWithCards:(NSArray *)cards;
+- (void)cardMatchingGameBrain:(JKCardMatchingGameBrain *)gameBrain didFindAMatchWithCards:(NSArray *)cards; // contains array of Card objects
 - (void)cardMatchingGameBrain:(JKCardMatchingGameBrain *)gameBrain didFailAMatchWithCards:(NSArray *)cards;
 - (void)cardMatchingGameBrainDidEndGame:(JKCardMatchingGameBrain *)gameBrain;
 @end
@@ -38,6 +38,8 @@
 
 - (void)startNewGameWithNewDeck:(Deck *)deck;
 - (void)cleanAllSelections; // clean all selected cards.
+
+- (NSUInteger)indexOfCard:(Card *)card;
 
 
 @end

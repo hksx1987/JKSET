@@ -18,6 +18,9 @@
 @end
 
 @implementation JKSETCardGameViewController
+{
+    BOOL _showHintIntroduction;
+}
 
 - (void)dealloc
 {
@@ -69,6 +72,11 @@
     [self displayRemainsSETs];
 }
 
+- (void)didRestartGame
+{
+    [self displayRemainsSETs];
+}
+
 #pragma mark - <JKSETJudgeDelegate>
 
 - (void)judge:(JKSETJudge *)judge didReceiveMatchFailureDescription:(NSString *)failureDescription
@@ -87,11 +95,17 @@
 
 - (IBAction)pressHintButton:(UIBarButtonItem *)sender
 {
+    if (!_showHintIntroduction) {
+        _showHintIntroduction = YES;
+        [self popHintIntroduction];
+    }
+    
     JKSETBrain *brain = (JKSETBrain *)self.gameBrain;
     
     // clean all selections
     [self removeAllSelectionLayer];
     [brain cleanAllSelections];
+    [self.judge cleanAllSelections];
     
     // choose suggested cards
     NSArray *possibleSETs = brain.possibleSETs;
@@ -101,10 +115,17 @@
     for (NSInteger i = 0; i < 2; ++i) {
         NSInteger indexValue = [possibleSET[i] integerValue];
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:indexValue inSection:0];
+        
+        // use this method to jump to the selection
+        [self.collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredVertically];
+        
         [self drawSelectionLayerAtIndexPath:indexPath];
         Card *card = [brain cardAtIndex:indexValue];
         [brain chooseCard:card];
+        [self.judge chooseCard:(SETCard *)card];
+        NSLog(@"%@", [card debugDescription]);
     }
+    NSLog(@" ");
 }
 
 #pragma mark - helper
@@ -114,8 +135,20 @@
     JKSETBrain *brain = (JKSETBrain *)self.gameBrain;
     [brain findAllPossibleSETsWithCompletion:^(NSArray *allPossibleSETs) {
         NSUInteger count = allPossibleSETs.count;
-        self.title = [NSString stringWithFormat:@"Remains:%lu", (unsigned long)count];
+        self.title = [NSString stringWithFormat:NSLocalizedString(@"Remains: %lu combinations", @"Showing { number } of possible SETs"), (unsigned long)count];
     }];
+}
+
+- (void)popHintIntroduction
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Hint 提示"
+                                                                   message:@"You can get 2 cards for hint, and go find another! 您可以获得提示中的两张卡片，需要自己寻找另一张。"
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK"
+                                                 style:UIAlertActionStyleDefault
+                                               handler:nil];
+    [alert addAction:ok];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end
