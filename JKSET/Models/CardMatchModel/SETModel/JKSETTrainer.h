@@ -22,5 +22,7 @@
 - (NSArray *)candidateCards; // returns an array of 2 cards for an incomplete SET
 - (NSArray *)optionalCardsWithCount:(NSUInteger)count; // returns an array of numbers of option cards, one of them is the answer.
 
+// Passing 2 cards and get a suggested result
+- (SETCard *)suggestedCardForCards:(NSArray *)cards;
 
 @end

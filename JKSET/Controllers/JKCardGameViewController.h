@@ -21,5 +21,10 @@
 // this is optional for overriding
 // the same API deals with both choose and unchoose card
 - (void)didChooseCard:(Card *)card;
+- (void)didFindAMatch;
+- (void)didFailAMatch;
+
+// subclass can override this to provide a subclass of JKCardMatchingGameBrain
+- (JKCardMatchingGameBrain *)brainForGame;
 
 @end

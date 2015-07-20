@@ -71,6 +71,11 @@
     return self.cards.count;
 }
 
+- (NSArray *)displayedCards
+{
+    return [[self.cards copy] autorelease];
+}
+
 #pragma mark -
 
 - (void)chooseCard:(Card *)card

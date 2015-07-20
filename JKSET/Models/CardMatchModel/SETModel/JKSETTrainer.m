@@ -94,6 +94,10 @@ char suggestedValue(char v1, char v2);
 
 - (SETCard *)suggestedCardForCards:(NSArray *)cards
 {
+    if (cards.count != 2) {
+        return nil;
+    }
+    
     SETCard *c1 = [cards firstObject];
     SETCard *c2 = [cards lastObject];
     

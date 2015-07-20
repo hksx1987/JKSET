@@ -22,6 +22,7 @@
 @interface JKCardMatchingGameBrain : NSObject
 
 @property (nonatomic, readonly) Deck *deck;
+@property (nonatomic, readonly) NSArray *displayedCards; // current cards for displaying
 @property (nonatomic, readonly) NSUInteger numberOfCards; // for displaying / displayed
 @property (nonatomic, assign) id <JKCardMatchingGameBrainDelegate> delegate;
 

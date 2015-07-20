@@ -11,6 +11,7 @@
 #import "SETCard.h"
 #import "JKClassicSetCardView.h"
 #import "JKSETJudge.h"
+#import "JKSETBrain.h"
 
 @interface JKSETCardGameViewController () <JKSETJudgeDelegate>
 @property (nonatomic, retain) JKSETJudge *judge;
@@ -31,6 +32,8 @@
     [super viewDidLoad];
     _judge = [[JKSETJudge alloc] init];
     _judge.delegate = self;
+    
+    [self displayRemainsSETs];
 }
 
 - (Deck *)deckForGame
@@ -49,9 +52,21 @@
     return [cardView autorelease];
 }
 
+- (JKCardMatchingGameBrain *)brainForGame
+{
+    Deck *deck = [self deckForGame];
+    JKSETBrain *brain = [[JKSETBrain alloc] initWithDeck:deck displayCount:[deck count] requiredMatchCount:3];
+    return [brain autorelease];
+}
+
 - (void)didChooseCard:(Card *)card
 {
     [self.judge chooseCard:(SETCard *)card];
+}
+
+- (void)didFindAMatch
+{
+    [self displayRemainsSETs];
 }
 
 #pragma mark - <JKSETJudgeDelegate>
@@ -66,6 +81,24 @@
                                                handler:nil];
     [alert addAction:ok];
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark - actions
+
+- (IBAction)pressHintButton:(UIBarButtonItem *)sender
+{
+    
+}
+
+#pragma mark - helper
+
+- (void)displayRemainsSETs
+{
+    JKSETBrain *brain = (JKSETBrain *)self.gameBrain;
+    [brain findAllPossibleSETsWithCompletion:^(NSArray *allPossibleSETs) {
+        NSUInteger count = allPossibleSETs.count;
+        self.title = [NSString stringWithFormat:@"Remains:%lu", (unsigned long)count];
+    }];
 }
 
 @end

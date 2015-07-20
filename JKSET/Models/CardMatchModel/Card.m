@@ -18,7 +18,7 @@
 
 - (void)dealloc
 {
-    NSLog(@"%@ deallocated", [self description]);
+//    NSLog(@"%@ deallocated", [self description]);
     [super dealloc];
 }
 

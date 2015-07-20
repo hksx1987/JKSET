@@ -28,6 +28,7 @@
 		32A4D1971B540556006149F3 /* SETCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A4D1911B540556006149F3 /* SETCard.m */; };
 		32A4D1981B540556006149F3 /* SETDeck.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A4D1931B540556006149F3 /* SETDeck.m */; };
 		32A4D19C1B5406D4006149F3 /* JKSetCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A4D19B1B5406D4006149F3 /* JKSetCardView.m */; };
+		32D0B8411B5CD45A0009FBBC /* JKSETBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D0B8401B5CD45A0009FBBC /* JKSETBrain.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,8 @@
 		32A4D19A1B5406D4006149F3 /* JKSetCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JKSetCardView.h; path = Views/JKSetCardView.h; sourceTree = "<group>"; };
 		32A4D19B1B5406D4006149F3 /* JKSetCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JKSetCardView.m; path = Views/JKSetCardView.m; sourceTree = "<group>"; };
 		32A4D19F1B5408CF006149F3 /* SETCardComponents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SETCardComponents.h; sourceTree = "<group>"; };
+		32D0B83F1B5CD45A0009FBBC /* JKSETBrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKSETBrain.h; sourceTree = "<group>"; };
+		32D0B8401B5CD45A0009FBBC /* JKSETBrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKSETBrain.m; sourceTree = "<group>"; };
 		32FBE2AB1B5A7C2900CE85F1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		32FBE2AC1B5A7C2900CE85F1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -194,6 +197,8 @@
 				325651441B58D4AD00368643 /* JKSETJudge.m */,
 				325651461B59183100368643 /* JKSETTrainer.h */,
 				325651471B59183100368643 /* JKSETTrainer.m */,
+				32D0B83F1B5CD45A0009FBBC /* JKSETBrain.h */,
+				32D0B8401B5CD45A0009FBBC /* JKSETBrain.m */,
 			);
 			path = SETModel;
 			sourceTree = "<group>";
@@ -338,6 +343,7 @@
 				325F400F1B5672EF004B079E /* JKCalculations.m in Sources */,
 				32A4D1661B540501006149F3 /* AppDelegate.m in Sources */,
 				32A4D1631B540501006149F3 /* main.m in Sources */,
+				32D0B8411B5CD45A0009FBBC /* JKSETBrain.m in Sources */,
 				32A4D1961B540556006149F3 /* Deck.m in Sources */,
 				325F400C1B56618F004B079E /* CALayer+IndexPath.m in Sources */,
 				325F40021B54DEE9004B079E /* JKCardMatchingGameBrain.m in Sources */,

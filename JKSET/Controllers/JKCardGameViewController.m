@@ -25,6 +25,15 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)setup
 {
+    // if subclasss provides brain, use it
+    _gameBrain = [[self brainForGame] retain];
+    
+    if (_gameBrain) {
+        _gameBrain.delegate = self;
+        return;
+    }
+    
+    // otherwise use the default brain
     Deck *deck = [self deckForGame];
     
     _gameBrain = [[JKCardMatchingGameBrain alloc] initWithDeck:deck displayCount:[deck count] requiredMatchCount:3];
@@ -140,7 +149,11 @@ static NSString * const reuseIdentifier = @"Cell";
         [self.gameBrain removeCards:cards];
         NSArray *indexPaths = [self.collectionView indexPathsForSelectedItems];
         [self.collectionView deleteItemsAtIndexPaths:indexPaths];
-    } completion:nil];
+    } completion:^(BOOL finished) {
+        if (finished) {
+            [self didFindAMatch];
+        }
+    }];
 }
 
 - (void)cardMatchingGameBrain:(JKCardMatchingGameBrain *)gameBrain didFailAMatchWithCards:(NSArray *)cards
@@ -151,6 +164,8 @@ static NSString * const reuseIdentifier = @"Cell";
     for (NSIndexPath *indexPath in indexPaths) {
         [self.collectionView deselectItemAtIndexPath:indexPath animated:YES];
     }
+    
+    [self didFailAMatch];
 }
 
 - (void)cardMatchingGameBrainDidEndGame:(JKCardMatchingGameBrain *)gameBrain
@@ -240,18 +255,13 @@ static NSString * const reuseIdentifier = @"Cell";
 
 #pragma mark -
 
-- (Deck *)deckForGame
-{
-    return nil;
-}
+- (Deck *)deckForGame { return nil; }
+- (UIView *)cardViewForCard:(Card *)card atIndexPath:(NSIndexPath *)indexPath { return nil; }
 
-- (UIView *)cardViewForCard:(Card *)card atIndexPath:(NSIndexPath *)indexPath
-{
-    return nil;
-}
+- (JKCardMatchingGameBrain *)brainForGame { return nil; }
 
-- (void)didChooseCard:(Card *)card
-{
-}
+- (void)didChooseCard:(Card *)card {}
+- (void)didFindAMatch {}
+- (void)didFailAMatch {}
 
 @end
