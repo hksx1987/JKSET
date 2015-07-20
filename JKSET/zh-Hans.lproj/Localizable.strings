@@ -49,4 +49,4 @@
 "Try one more?" = "再试一局?";
 
 /* Showing { number } of possible SETs */
-"Remains: %lu combinations" = "剩余 %lu 对SET";
+"Remains: %lu combinations" = "剩余 %lu 对组合";
