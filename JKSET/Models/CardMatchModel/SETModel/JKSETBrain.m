@@ -73,6 +73,7 @@
                             if (!containsCombination(comb, n)) {
                                 combs[n] = comb;
                                 ++n;
+                                break;
                             }
                         }
                     }
