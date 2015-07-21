@@ -102,6 +102,11 @@
     [brain cleanAllSelections];
     [self.judge cleanAllSelections];
     
+    NSArray *indexPaths = [self.collectionView indexPathsForSelectedItems];
+    for (NSIndexPath *indexPath in indexPaths) {
+        [self.collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    }
+    
     // choose suggested cards
     NSArray *possibleSET = [brain randomSET];
     

@@ -117,13 +117,24 @@
                                                   number:comb.thirdCard.number
                                                  shading:comb.thirdCard.shading];
     
-    NSArray *randomSET = @[firstCard, secondCard, thirdCard];
+    NSArray *newRandomSET = @[firstCard, secondCard, thirdCard];
     
     [firstCard release];
     [secondCard release];
     [thirdCard release];
     
-    return randomSET;
+    // Here I switch back to get original SET cards instead of new cards,
+    // because they have exact same value, so it is easy to track.
+    // This step is important because a lot of other changes are related to
+    // the original cards.
+    NSMutableArray *originalRandomSET = [NSMutableArray arrayWithCapacity:3];
+    for (SETCard *newCard in newRandomSET) {
+        NSUInteger i = [self indexOfCard:newCard];
+        Card *originalCard = [self cardAtIndex:i];
+        [originalRandomSET addObject:originalCard];
+    }
+    
+    return [[originalRandomSET copy] autorelease];
 }
 
 @end
