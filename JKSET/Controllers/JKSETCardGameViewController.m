@@ -95,11 +95,6 @@
 
 - (IBAction)pressHintButton:(UIBarButtonItem *)sender
 {
-    if (!_showHintIntroduction) {
-        _showHintIntroduction = YES;
-        [self popHintIntroduction];
-    }
-    
     JKSETBrain *brain = (JKSETBrain *)self.gameBrain;
     
     // clean all selections
@@ -108,24 +103,32 @@
     [self.judge cleanAllSelections];
     
     // choose suggested cards
-    NSArray *possibleSETs = brain.possibleSETs;
-    NSUInteger randomIndex = arc4random_uniform(possibleSETs.count);
-    NSArray *possibleSET = ((NSSet *)possibleSETs[randomIndex]).allObjects;
+    NSArray *possibleSET = [brain randomSET];
     
-    for (NSInteger i = 0; i < 2; ++i) {
-        NSInteger indexValue = [possibleSET[i] integerValue];
-        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:indexValue inSection:0];
+    if (!possibleSET) {
+        return;
+    }
+    
+    for (NSUInteger i = 0; i < possibleSET.count-1; ++i) {
+        SETCard *card = possibleSET[i];
+        NSUInteger index = [brain indexOfCard:card];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:(NSInteger)index inSection:0];
         
         // use this method to jump to the selection
         [self.collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredVertically];
         
         [self drawSelectionLayerAtIndexPath:indexPath];
-        Card *card = [brain cardAtIndex:indexValue];
         [brain chooseCard:card];
         [self.judge chooseCard:(SETCard *)card];
         NSLog(@"%@", [card debugDescription]);
     }
     NSLog(@" ");
+    
+    if (!_showHintIntroduction) {
+        _showHintIntroduction = YES;
+        [self popHintIntroduction];
+    }
+    
 }
 
 #pragma mark - helper
@@ -133,9 +136,8 @@
 - (void)displayRemainsSETs
 {
     JKSETBrain *brain = (JKSETBrain *)self.gameBrain;
-    [brain findAllPossibleSETsWithCompletion:^(NSArray *allPossibleSETs) {
-        NSUInteger count = allPossibleSETs.count;
-        self.title = [NSString stringWithFormat:NSLocalizedString(@"Remains: %lu combinations", @"Showing { number } of possible SETs"), (unsigned long)count];
+    [brain findAllPossibleSETsWithCompletion:^(NSUInteger numberOfAllPossibleSETs) {
+        self.title = [NSString stringWithFormat:NSLocalizedString(@"Remains: %lu combinations", @"Showing { number } of possible SETs"), (unsigned long)numberOfAllPossibleSETs];
     }];
 }
 

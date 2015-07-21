@@ -24,6 +24,9 @@ The project is an assignment of Stanford iOS 7 development course and the purpos
 （简单UICollectionView的应用，并体现良好的性能）
 
 
+The default demo is Chinese localization, you can change it by "Edit Scheme.. -> Run -> Options -> Application Language (English), Application Region (System Region)"
+
+
 －－－－－－－－－－－－－－－－－－－－－－－－－
 
 

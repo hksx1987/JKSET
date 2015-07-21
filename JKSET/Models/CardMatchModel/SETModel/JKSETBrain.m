@@ -8,7 +8,9 @@
 
 #import "JKSETBrain.h"
 #import "SETCard.h"
-#import "JKSETTrainer.h"
+#include "JKSETCType.h"
+
+#define SET_CARDS_MAX 81
 
 @interface JKSETBrain()
 @property (nonatomic, copy) NSArray *possibleSETs;
@@ -16,14 +18,14 @@
 
 @implementation JKSETBrain
 {
-    JKSETTrainer *_trainer;
+    TheSETCard theCards[SET_CARDS_MAX];
+    NSUInteger _numberOfAllPossibleSETs;
 }
 
 - (instancetype)initWithDeck:(Deck *)deck displayCount:(NSUInteger)count requiredMatchCount:(NSUInteger)matchCount
 {
     self = [super initWithDeck:deck displayCount:count requiredMatchCount:matchCount];
     if (self) {
-        _trainer = [[JKSETTrainer alloc] init];
         _possibleSETs = [[NSArray alloc] init];
     }
     return self;
@@ -31,40 +33,46 @@
 
 - (void)dealloc
 {
-    [_trainer release];
     [_possibleSETs release];
     [super dealloc];
 }
 
-- (void)findAllPossibleSETsWithCompletion:(void(^)(NSArray *allPossibleSETs))completion
+- (void)findAllPossibleSETsWithCompletion:(void(^)(NSUInteger numberOfAllPossibleSETs))completion
 {
     dispatch_queue_t calculationQueue = dispatch_get_global_queue(0, 0);
     dispatch_async(calculationQueue, ^{
         
         NSArray *cards = self.displayedCards;
         NSUInteger count = cards.count;
+        NSUInteger i, j, m, n = 0, x;
         
-        NSMutableSet *sets = [NSMutableSet set];
-        NSUInteger i = 0, j = 0, m = 0;
+        removeCombinationsAmountOf(_numberOfAllPossibleSETs);
+        
+        // convert NSArray to C array
+        // convert SETCard class to TheSETCard struct
+        // for performance, only reset first amount of C array, same work for combs
+        for (x = 0; x < count; ++x) {
+            SETCard *card = cards[x];
+            TheSETCard theCard = TheSETCardMake(card.symbol, card.color, card.number, card.shading);
+            theCards[x] = theCard;
+        }
         
         for (i = 0; i < count; ++i) {
-            SETCard *c1 = cards[i];
+            TheSETCard c1 = theCards[i];
             
             for (j = 0; j < count; ++j) {
-                SETCard *c2 = cards[j];
-                
-                if (c1 != c2) {
+                if (j != i) {
+                    TheSETCard c2 = theCards[j];
+                    TheSETCard sc = suggestSETCard(c1, c2);
                     
-                    SETCard *sc = [_trainer suggestedCardForCards:@[c1, c2]];
-                    
-                    for (m = j; m < count; ++m) {
-                        SETCard *c3 = cards[m];
+                    for (m = j+1; m < count; ++m) {
+                        TheSETCard c3 = theCards[m];
                         
-                        if (c3 != c1 && c3 != c2) {
-                            if ([sc isEqual:c3]) {
-                                NSSet *set = [NSSet setWithObjects:@(i), @(j), @(m), nil];
-                                [sets addObject:set];
-                                break;
+                        if (TheSETCardIsEqualToTheSETCard(sc, c3)) {
+                            Combination comb = CombinationMake(c1, c2, c3);
+                            if (!containsCombination(comb, n)) {
+                                combs[n] = comb;
+                                ++n;
                             }
                         }
                     }
@@ -72,21 +80,81 @@
             }
         }
         
+        _numberOfAllPossibleSETs = n;
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            if (!sets.count) {
+            if (!_numberOfAllPossibleSETs) {
                 [self.delegate cardMatchingGameBrainDidEndGame:self];
             }
             
-            NSArray *possibleSETs = sets.allObjects;
-            
             if (completion) {
-                completion(possibleSETs);
+                completion(_numberOfAllPossibleSETs);
             }
-            
-            self.possibleSETs = possibleSETs;
         });
     });
 }
 
+- (NSArray *)randomSET
+{
+    NSUInteger randomIndex = arc4random_uniform(_numberOfAllPossibleSETs);
+    Combination comb = combs[randomIndex];
+    
+    if (TheSETCardIsZero(comb.firstCard)) {
+        return nil;
+    }
+    
+    SETCard *firstCard = [[SETCard alloc] initWithSymbol:comb.firstCard.symbol
+                                                   color:comb.firstCard.color
+                                                  number:comb.firstCard.number
+                                                 shading:comb.firstCard.shading];
+    SETCard *secondCard = [[SETCard alloc] initWithSymbol:comb.secondCard.symbol
+                                                   color:comb.secondCard.color
+                                                  number:comb.secondCard.number
+                                                 shading:comb.secondCard.shading];
+    SETCard *thirdCard = [[SETCard alloc] initWithSymbol:comb.thirdCard.symbol
+                                                   color:comb.thirdCard.color
+                                                  number:comb.thirdCard.number
+                                                 shading:comb.thirdCard.shading];
+    
+    NSArray *randomSET = @[firstCard, secondCard, thirdCard];
+    
+    [firstCard release];
+    [secondCard release];
+    [thirdCard release];
+    
+    return randomSET;
+}
+
 @end
+
+// Using NSSet approach
+
+//        NSMutableSet sets = [NSMutableSet set];
+//        for (i = 0; i < count; ++i) {
+//            SETCard *c1 = cards[i];
+//
+//            for (j = 0; j < count; ++j) {
+//                SETCard *c2 = cards[j];
+//
+//                if (c1 != c2) {
+//
+//                    SETCard *sc = [_trainer suggestedCardForCards:@[c1, c2]];
+//
+//                    for (m = j; m < count; ++m) {
+//                        SETCard *c3 = cards[m];
+//
+//                        if (c3 != c1 && c3 != c2) {
+//                            if ([sc isEqual:c3]) {
+//                                NSSet *set = [NSSet setWithObjects:@(i), @(j), @(m), nil];
+//                                [sets addObject:set];
+//                                break;
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+
+
+
