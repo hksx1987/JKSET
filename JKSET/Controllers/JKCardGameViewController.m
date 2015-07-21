@@ -271,6 +271,14 @@ static NSString * const reuseIdentifier = @"Cell";
 //    }
 }
 
+#pragma mark - actions
+
+- (IBAction)pressPracticeButton:(id)sender {
+    UIViewController *testVC = [self.storyboard instantiateViewControllerWithIdentifier:@"JKSETTrainingViewController"];
+    [self presentViewController:testVC animated:YES completion:nil];
+}
+
+
 #pragma mark -
 
 - (Deck *)deckForGame { return nil; }

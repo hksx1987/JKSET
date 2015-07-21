@@ -97,9 +97,9 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="Uuc-sv-mlS">
-                        <barButtonItem key="leftBarButtonItem" title="Reset" id="keT-GV-Ecw">
+                        <barButtonItem key="leftBarButtonItem" title="Practice" id="keT-GV-Ecw">
                             <connections>
-                                <action selector="pressResetButton:" destination="dWD-We-YHe" id="ahV-Ld-lft"/>
+                                <action selector="pressPracticeButton:" destination="dWD-We-YHe" id="I2G-iF-S0x"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Hints" id="JZe-Zg-elm">
