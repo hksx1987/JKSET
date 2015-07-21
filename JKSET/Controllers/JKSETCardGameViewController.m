@@ -136,6 +136,23 @@
     
 }
 
+- (IBAction)pressResetButton:(UIBarButtonItem *)sender {
+    UIAlertController *alert =[UIAlertController alertControllerWithTitle:@"Reset 重置"
+                                                                  message:@"Game is restarted."
+                                                           preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"ok"
+                                                 style:UIAlertActionStyleDefault
+                                               handler:^(UIAlertAction *action) {
+       Deck *deck = [self deckForGame];
+       [self.gameBrain startNewGameWithNewDeck:deck];
+       [self.collectionView reloadData];
+       [self didRestartGame];
+                                               }];
+    [alert addAction:ok];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+
 #pragma mark - helper
 
 - (void)displayRemainsSETs

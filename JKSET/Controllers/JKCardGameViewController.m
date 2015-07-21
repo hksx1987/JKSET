@@ -93,12 +93,14 @@ static NSString * const reuseIdentifier = @"Cell";
     // Very important to clean up the contents of cell before reuse it!!
     // Otherwise the memory usage will go up fast, because the cell stayed
     // in the reuse queue will not clean up it's contentView automatically.
-    UIView *cardView = [cell.contentView.subviews lastObject];
-    [cardView removeFromSuperview];
+    if (cell.contentView.subviews.count) {
+        UIView *lastSubview = [cell.contentView.subviews lastObject];
+        [lastSubview removeFromSuperview];
+    }
     
     // Configure the cell
     Card *card = [self.gameBrain cardAtIndex:indexPath.row];
-    cardView = [self cardViewForCard:card atIndexPath:indexPath];
+    UIView *cardView = [self cardViewForCard:card atIndexPath:indexPath];
     [cell.contentView addSubview:cardView];
     
     return cell;
@@ -153,6 +155,12 @@ static NSString * const reuseIdentifier = @"Cell";
         NSUInteger i = [self.gameBrain indexOfCard:card];
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
         [indexPaths addObject:indexPath];
+    }
+    
+    NSSet *calculationIndexPathsSet = [NSSet setWithArray:indexPaths];
+    NSSet *selectionIndexPathsSet = [NSSet setWithArray:[self.collectionView indexPathsForSelectedItems]];
+    if (![calculationIndexPathsSet isEqualToSet:selectionIndexPathsSet]) {
+        [NSException raise:NSInternalInconsistencyException format:@"The calculated selected index paths should be same as selected from collectionView."];
     }
     
     [self.collectionView performBatchUpdates:^{

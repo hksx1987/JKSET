@@ -167,6 +167,7 @@
 - (void)startNewGameWithNewDeck:(Deck *)deck
 {
     self.deck = deck;
+    [self.cards removeAllObjects];
     [self displayCards];
 }
 
