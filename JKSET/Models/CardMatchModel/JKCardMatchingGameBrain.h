@@ -40,6 +40,6 @@
 - (void)cleanAllSelections; // clean all selected cards.
 
 - (NSUInteger)indexOfCard:(Card *)card;
-
+- (NSArray *)lastRemovedCards;
 
 @end

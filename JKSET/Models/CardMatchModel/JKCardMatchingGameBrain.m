@@ -14,6 +14,7 @@
 @property (nonatomic, retain) Deck *deck;
 @property (nonatomic, retain) NSMutableArray *cards;
 @property (nonatomic, retain) NSMutableArray *chosenCards;
+@property (nonatomic, copy) NSArray *lastRemovedCards;
 @property (nonatomic) NSUInteger displayCount;
 @property (nonatomic) NSUInteger matchCount;
 @property (nonatomic) NSInteger score;
@@ -138,6 +139,9 @@
 
 - (void)removeCards:(NSArray *)cards
 {
+    // get a copy of removed cards
+    self.lastRemovedCards = cards;
+    
     [self.cards removeObjectsInArray:cards];
     if (!self.cards.count) {
         [self.delegate cardMatchingGameBrainDidEndGame:self];
@@ -160,6 +164,11 @@
 - (NSUInteger)indexOfCard:(Card *)card
 {
     return [self.cards indexOfObject:card];
+}
+
+- (NSArray *)lastRemovedCards
+{
+    return _lastRemovedCards;
 }
 
 #pragma mark - helper

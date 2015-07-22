@@ -13,6 +13,8 @@
 #import "JKSETJudge.h"
 #import "JKSETBrain.h"
 
+#include "JKSETCType.h"
+
 @interface JKSETCardGameViewController () <JKSETJudgeDelegate>
 @property (nonatomic, retain) JKSETJudge *judge;
 @end
@@ -36,7 +38,10 @@
     _judge = [[JKSETJudge alloc] init];
     _judge.delegate = self;
     
-    [self displayRemainsSETs];
+    JKSETBrain *brain = (JKSETBrain *)self.gameBrain;
+    [brain findAllPossibleSETsWithCompletion:^(NSUInteger numberOfAllPossibleSETs) {
+        self.title = [NSString stringWithFormat:NSLocalizedString(@"Remains: %lu combinations", @"Showing { number } of possible SETs"), (unsigned long)numberOfAllPossibleSETs];
+    }];
 }
 
 - (Deck *)deckForGame
