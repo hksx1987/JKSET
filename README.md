@@ -23,8 +23,8 @@ The project is an assignment of Stanford iOS 7 development course and the purpos
 5. Simple UICollectionView with good performance.
 （简单UICollectionView的应用，并体现良好的性能）
 
-6. C functions and algorithm for calculating all possible SETs and fast responding.
-（由C语言算法实现所有配对组合，反馈迅速）
+6. Using C language for algorithm which handles large calculations.
+（由C语言实现查找所有可能配对组合的算法）
 
 
 The default demo is Chinese localization, you can change it by "Edit Scheme.. -> Run -> Options -> Application Language (English), Application Region (System Region)"
@@ -88,6 +88,16 @@ JKSETJudge
 JKSETTrainer
 
   -Additional class for helping user practice the game.
+
+
+JKSETBrain
+
+  -The subclass of JKCardMatchingGameBrain and handle specific SET game details.
+
+
+JKSETCType
+
+  -The C structs, arrays, and functions for sorting and comparison. The fast way to make large calculations better than using Foundation objects.
 
 
 
