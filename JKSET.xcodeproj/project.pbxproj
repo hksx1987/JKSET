@@ -16,6 +16,7 @@
 		325F40081B55FDA1004B079E /* JKSETCardGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 325F40071B55FDA1004B079E /* JKSETCardGameViewController.m */; };
 		325F400C1B56618F004B079E /* CALayer+IndexPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 325F400B1B56618F004B079E /* CALayer+IndexPath.m */; };
 		325F400F1B5672EF004B079E /* JKCalculations.m in Sources */ = {isa = PBXBuildFile; fileRef = 325F400E1B5672EE004B079E /* JKCalculations.m */; };
+		3273CAE61B60DF66005A24ED /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 3273CAE51B60DF66005A24ED /* README.md */; };
 		32871EFF1B5DEBEF004F57CF /* JKSETCType.c in Sources */ = {isa = PBXBuildFile; fileRef = 32871EFD1B5DEBEF004F57CF /* JKSETCType.c */; };
 		32A4D1631B540501006149F3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A4D1621B540501006149F3 /* main.m */; };
 		32A4D1661B540501006149F3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A4D1651B540501006149F3 /* AppDelegate.m */; };
@@ -62,6 +63,7 @@
 		325F400B1B56618F004B079E /* CALayer+IndexPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CALayer+IndexPath.m"; path = "Views/CALayer+IndexPath.m"; sourceTree = "<group>"; };
 		325F400D1B5672EE004B079E /* JKCalculations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JKCalculations.h; path = Views/JKCalculations.h; sourceTree = "<group>"; };
 		325F400E1B5672EE004B079E /* JKCalculations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JKCalculations.m; path = Views/JKCalculations.m; sourceTree = "<group>"; };
+		3273CAE51B60DF66005A24ED /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		32871EFD1B5DEBEF004F57CF /* JKSETCType.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = JKSETCType.c; sourceTree = "<group>"; };
 		32871EFE1B5DEBEF004F57CF /* JKSETCType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKSETCType.h; sourceTree = "<group>"; };
 		32A4D15D1B540501006149F3 /* JKSET.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JKSET.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,6 +135,7 @@
 		32A4D15F1B540501006149F3 /* JKSET */ = {
 			isa = PBXGroup;
 			children = (
+				3273CAE51B60DF66005A24ED /* README.md */,
 				32A4D1641B540501006149F3 /* AppDelegate.h */,
 				32A4D1651B540501006149F3 /* AppDelegate.m */,
 				32A4D19D1B5406D8006149F3 /* Views */,
@@ -351,6 +354,7 @@
 				32D0B8411B5CD45A0009FBBC /* JKSETBrain.m in Sources */,
 				32A4D1961B540556006149F3 /* Deck.m in Sources */,
 				325F400C1B56618F004B079E /* CALayer+IndexPath.m in Sources */,
+				3273CAE61B60DF66005A24ED /* README.md in Sources */,
 				325F40021B54DEE9004B079E /* JKCardMatchingGameBrain.m in Sources */,
 				325651451B58D4AD00368643 /* JKSETJudge.m in Sources */,
 				32A4D1981B540556006149F3 /* SETDeck.m in Sources */,
