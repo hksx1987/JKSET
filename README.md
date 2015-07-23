@@ -17,11 +17,14 @@ The project is an assignment of Stanford iOS 7 development course and the purpos
 3. Object-oriented programming style with good extensibility and flexibility.
 （体现了面向对象编程风格，带有良好的延展性，灵活易改动）
 
-4. Well-structured, localization, simple runtime feature.
+4. Well-structured (probably), localization, simple runtime feature.
 （良好架构，本地化应用，简单动态特性的体现）
 
-5. Simple UICollectionView with good performance
+5. Simple UICollectionView with good performance.
 （简单UICollectionView的应用，并体现良好的性能）
+
+6. C functions and algorithm for calculating all possible SETs and fast responding.
+（由C语言算法实现所有配对组合，反馈迅速）
 
 
 The default demo is Chinese localization, you can change it by "Edit Scheme.. -> Run -> Options -> Application Language (English), Application Region (System Region)"
