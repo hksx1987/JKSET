@@ -4,6 +4,8 @@ wikipedia(SET game) - https://en.wikipedia.org/wiki/Set_(game)
 百度百科（SET纸牌）- http://baike.baidu.com/view/2024040.htm
 百度百科（SET神奇形色牌）- http://baike.baidu.com/view/3989582.htm
 
+这里是我写的关于对本项目的理解、实现以及思路https://dayone.me/1ZWczvM
+
 This is a iOS version of SET game demo for showing what this game is and how to play it. Most importantly, it is the demo for showing the Objective C programming language.
 
 The project is an assignment of Stanford iOS 7 development course and the purpose of this demo is for showing general features of Objective C. What you can see:
