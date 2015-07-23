@@ -18,21 +18,33 @@
     BOOL _isSETCTypeSetup;
 }
 
+- (void)setupNewCalculationStatus
+{
+    CTSetupInitialCalculationStatus();
+}
+
+- (NSUInteger)maxNumberOfAllPossibleSETs
+{
+    return CT_POSSIBLE_SETS_MAX;
+}
+
 - (void)findAllPossibleSETsWithCompletion:(void(^)(NSUInteger numberOfAllPossibleSETs))completion
 {
     if (!_isSETCTypeSetup) {
         _isSETCTypeSetup = YES;
-        CTSetupWithCompletion(^(int initialPossibleSETs) {
-            if (completion) {
-                completion(initialPossibleSETs);
-            }
-        });
+        
+        CTSetupWithCompletion(NULL);
+        
+        if (completion) {
+            completion(CT_POSSIBLE_SETS_MAX);
+        }
+        
     } else {
         
         NSArray *removedCards = [self lastRemovedCards];
         CTSETCombination comb;
-        int i = 0;
         
+        int i = 0;
         for (SETCard *card in removedCards) {
             CTSETCard ct_card = CTSETCardMake(card.symbol, card.color, card.number, card.shading);
             comb.cards[i] = ct_card;
@@ -40,6 +52,11 @@
         }
         
         CTRemoveCombination(comb, ^(int getPossibleSETsCount) {
+            
+            if (!getPossibleSETsCount) {
+                [self.delegate cardMatchingGameBrainDidEndGame:self];
+            }
+            
             if (completion) {
                 completion(getPossibleSETsCount);
             }
@@ -71,7 +88,7 @@
 
 @end
 
-// Using NSSet approach
+// Using NSSet approach (simple to write, but slow and inefficient for large data here)
 
 //        NSMutableSet sets = [NSMutableSet set];
 //        for (i = 0; i < count; ++i) {

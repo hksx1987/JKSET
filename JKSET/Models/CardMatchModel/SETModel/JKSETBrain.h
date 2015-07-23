@@ -10,6 +10,11 @@
 
 @interface JKSETBrain : JKCardMatchingGameBrain
 
+- (NSUInteger)maxNumberOfAllPossibleSETs;
+
+// Setup starting status after game ended and prepare for new game.
+- (void)setupNewCalculationStatus;
+
 // Every time call this method, the brain will make a big calculation.
 - (void)findAllPossibleSETsWithCompletion:(void(^)(NSUInteger numberOfAllPossibleSETs))completion;
 

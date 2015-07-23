@@ -74,12 +74,17 @@
 
 - (void)didFindAMatch
 {
-    [self displayRemainsSETs];
+    JKSETBrain *brain = (JKSETBrain *)self.gameBrain;
+    [brain findAllPossibleSETsWithCompletion:^(NSUInteger numberOfAllPossibleSETs) {
+        self.title = [NSString stringWithFormat:NSLocalizedString(@"Remains: %lu combinations", @"Showing { number } of possible SETs"), (unsigned long)numberOfAllPossibleSETs];
+    }];
 }
 
 - (void)didRestartGame
 {
-    [self displayRemainsSETs];
+    JKSETBrain *brain = (JKSETBrain *)self.gameBrain;
+    [brain setupNewCalculationStatus];
+    self.title = [NSString stringWithFormat:NSLocalizedString(@"Remains: %lu combinations", @"Showing { number } of possible SETs"), (unsigned long)[brain maxNumberOfAllPossibleSETs]];
 }
 
 #pragma mark - <JKSETJudgeDelegate>
@@ -142,14 +147,6 @@
 }
 
 #pragma mark - helper
-
-- (void)displayRemainsSETs
-{
-    JKSETBrain *brain = (JKSETBrain *)self.gameBrain;
-    [brain findAllPossibleSETsWithCompletion:^(NSUInteger numberOfAllPossibleSETs) {
-        self.title = [NSString stringWithFormat:NSLocalizedString(@"Remains: %lu combinations", @"Showing { number } of possible SETs"), (unsigned long)numberOfAllPossibleSETs];
-    }];
-}
 
 - (void)popHintIntroduction
 {

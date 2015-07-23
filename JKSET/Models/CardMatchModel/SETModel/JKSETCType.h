@@ -44,6 +44,11 @@ CTSETCard CTSETCardMakeBlankCard();
 CTSETCombination CTSETCombinationMake(CTSETCard c1, CTSETCard c2, CTSETCard c3);
 CTSETCombination CTSETCombinationMakeZero();
 
+// call this function after game ended and before restart a new round of game,
+// so it can reset to initial status before calculating new results.
+void CTSetupInitialCalculationStatus();
+bool CTSETCombinationStatusIsInitialStatus();
+
 void CTSetupWithCompletion(ct_completion_block completion);
 
 void CTRemoveCombinationCards(CTSETCard c1, CTSETCard c2, CTSETCard c3, ct_completion_block completion);
@@ -52,6 +57,6 @@ void CTRemoveCombination(CTSETCombination combination, ct_completion_block compl
 void CTGetRandomCombinationCards(CTSETCard *c1, CTSETCard *c2, CTSETCard *c3);
 CTSETCombination CTGetRandomCombination();
 
-bool CTSETCombinationStatusIsInitialStatus();
+
 
 #endif /* defined(__JKSET__JKSETCType__) */

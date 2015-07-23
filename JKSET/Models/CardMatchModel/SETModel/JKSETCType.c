@@ -137,7 +137,7 @@ void CTSetupAllCombinations()
     }
 }
 
-void CTResetStatus()
+void CTSetupInitialCalculationStatus()
 {
     ct_numberOfAllPossibleSETs = CT_POSSIBLE_SETS_MAX;
     ct_swap_index = CT_POSSIBLE_SETS_MAX - 1;
@@ -175,7 +175,7 @@ void CTRemoveCombinationCards(CTSETCard c1, CTSETCard c2, CTSETCard c3, ct_compl
         int i, j;
         int allSETsCount = ct_numberOfAllPossibleSETs;
         for (i = 0; i < allSETsCount; ++i) {
-            if (i >= ct_swap_index) { break; } // pretend to over border and swap back!
+            if (i > ct_swap_index) { break; } // pretend to over border and swap back! if i == swap_index, then switch itself and move index up!
             for (j = 0; j < 3; ++j) {
                 CTSETCard card = ct_combs[i][j];
                 if (CTSETCardIsEqualToCard(card, c1) ||
@@ -308,10 +308,9 @@ void CTSwapCombinationDownFromCurrentIndex(int index, CTSETCard c1, CTSETCard c2
     
     ct_swap_index--;
     
-    if (ct_swap_index == 0) {
-        CTResetStatus();
-        return;
-    }
+    // finally swap_index = -1;
+    // don't call CTResetStatus() here, because the comparison loop is not finished yet.
+    // so better call CTResetStatus() after game finished.
 }
 
 char suggestedRawValue(char v1, char v2)

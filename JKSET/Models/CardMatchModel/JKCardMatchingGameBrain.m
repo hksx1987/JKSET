@@ -143,9 +143,6 @@
     self.lastRemovedCards = cards;
     
     [self.cards removeObjectsInArray:cards];
-    if (!self.cards.count) {
-        [self.delegate cardMatchingGameBrainDidEndGame:self];
-    }
 }
 
 - (Card *)cardAtIndex:(NSUInteger)index
