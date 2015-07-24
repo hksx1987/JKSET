@@ -11,14 +11,22 @@
 #import "Card.h"
 
 @interface JKCardMatchingGameBrain ()
+
 @property (nonatomic, retain) Deck *deck;
 @property (nonatomic, retain) NSMutableArray *cards;
 @property (nonatomic, retain) NSMutableArray *chosenCards;
 @property (nonatomic, copy) NSArray *lastRemovedCards;
+
 @property (nonatomic) NSUInteger displayCount;
 @property (nonatomic) NSUInteger matchCount;
 @property (nonatomic) NSInteger score;
+
 @end
+
+NSString * const JKCardMatchingGameBrainDidFindMatchNotification = @"JKCardMatchingGameBrainDidFindMatchNotification";
+NSString * const JKCardMatchingGameBrainDidMissMatchNotification = @"JKCardMatchingGameBrainDidMissMatchNotification";
+NSString * const JKCardMatchingGameBrainDidEndGameNotification = @"JKCardMatchingGameBrainDidEndGameNotification";
+NSString * const JKCardMatchingGameBrainComparedCardsKey = @"JKCardMatchingGameBrainComparedCardsKey";
 
 @implementation JKCardMatchingGameBrain
 
@@ -33,27 +41,32 @@
         _chosenCards = [[NSMutableArray alloc] init];
         _score = 0;
         
-        if (!_deck) {
-            [NSException raise: NSGenericException
-                        format: @"Deck Must be not nil for the game!"];
-        }
-        
-        if (matchCount < 2 || matchCount > displayCount) {
+        if (matchCount < 2) {
             [NSException raise: NSInvalidArgumentException
                         format: @"Need at least 2 cards and not too much cards for matching!"];
         } else {
             _matchCount = matchCount;
         }
         
-        if (displayCount <= [deck count]) {
-            _displayCount = displayCount;
+        _displayCount = displayCount;
+        
+        if (displayCount > 0) {
             [self displayCards];
-        } else {
-            [NSException raise: NSInvalidArgumentException
-                        format: @"Can not display cards more than the deck!"];
+        }
+        
+        if (_deck) {
+            if (displayCount <= [_deck count]) {
+                [NSException raise: NSInvalidArgumentException
+                            format: @"Can not display cards more than the deck!"];
+            }
         }
     }
     return self;
+}
+
+- (instancetype)init
+{
+    return [self initWithDeck:nil displayCount:0 requiredMatchCount:2];
 }
 
 - (void)dealloc
@@ -108,7 +121,7 @@
                     for (Card *card in matchedCards) {
                         card.isMatched = YES;
                     }
-                    [self.delegate cardMatchingGameBrain:self didFindAMatchWithCards:matchedCards];
+                    [self didFindAMatchWithCards:matchedCards];
                 }
                 /* match failed */
                 else {
@@ -116,7 +129,7 @@
                     NSMutableArray *failedCards = [NSMutableArray arrayWithArray:self.chosenCards];
                     [failedCards addObject:card];
                     
-                    [self.delegate cardMatchingGameBrain:self didFailAMatchWithCards:failedCards];
+                    [self didMissMatchWithCards:failedCards];
                 }
                 
                 // clean chosenCards
@@ -143,6 +156,9 @@
     self.lastRemovedCards = cards;
     
     [self.cards removeObjectsInArray:cards];
+    if (!self.cards.count) {
+        [self didOutOfCards];
+    }
 }
 
 - (Card *)cardAtIndex:(NSUInteger)index
@@ -152,9 +168,12 @@
 
 - (void)cleanAllSelections
 {
-    for (Card *card in self.cards) {
-        card.isChosen = NO;
+    if (self.cards.count) {
+        for (Card *card in self.cards) {
+            card.isChosen = NO;
+        }
     }
+    
     [self.chosenCards removeAllObjects];
 }
 
@@ -168,7 +187,33 @@
     return _lastRemovedCards;
 }
 
+- (void)didOutOfCards
+{
+    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+    [defaultCenter postNotificationName:JKCardMatchingGameBrainDidEndGameNotification
+                                 object:self
+                               userInfo:nil];
+}
+
 #pragma mark - helper
+
+- (void)didFindAMatchWithCards:(NSArray *)cards
+{
+    NSDictionary *userInfo = @{ JKCardMatchingGameBrainComparedCardsKey : cards };
+    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+    [defaultCenter postNotificationName:JKCardMatchingGameBrainDidFindMatchNotification
+                                 object:self
+                               userInfo:userInfo];
+}
+
+- (void)didMissMatchWithCards:(NSArray *)cards
+{
+    NSDictionary *userInfo = @{ JKCardMatchingGameBrainComparedCardsKey : cards };
+    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+    [defaultCenter postNotificationName:JKCardMatchingGameBrainDidMissMatchNotification
+                                 object:self
+                               userInfo:userInfo];
+}
 
 - (void)startNewGameWithNewDeck:(Deck *)deck
 {
@@ -188,3 +233,4 @@
 }
 
 @end
+

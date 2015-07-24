@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		322C86661B6255A4008BDAB5 /* JKSetCardView+EquatableCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 322C86651B6255A4008BDAB5 /* JKSetCardView+EquatableCard.m */; };
+		322C86691B6272C7008BDAB5 /* JKSETDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 322C86681B6272C7008BDAB5 /* JKSETDescriptor.m */; };
 		32372FE41B5AA76D00C613AE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 32372FE61B5AA76D00C613AE /* Localizable.strings */; };
-		325651451B58D4AD00368643 /* JKSETJudge.m in Sources */ = {isa = PBXBuildFile; fileRef = 325651441B58D4AD00368643 /* JKSETJudge.m */; };
 		325651481B59183100368643 /* JKSETTrainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 325651471B59183100368643 /* JKSETTrainer.m */; };
 		325F3FFF1B54D788004B079E /* JKClassicSetCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 325F3FFE1B54D788004B079E /* JKClassicSetCardView.m */; };
 		325F40021B54DEE9004B079E /* JKCardMatchingGameBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = 325F40011B54DEE9004B079E /* JKCardMatchingGameBrain.m */; };
@@ -47,11 +47,11 @@
 /* Begin PBXFileReference section */
 		322C86641B6255A4008BDAB5 /* JKSetCardView+EquatableCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "JKSetCardView+EquatableCard.h"; path = "Views/JKSetCardView+EquatableCard.h"; sourceTree = "<group>"; };
 		322C86651B6255A4008BDAB5 /* JKSetCardView+EquatableCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "JKSetCardView+EquatableCard.m"; path = "Views/JKSetCardView+EquatableCard.m"; sourceTree = "<group>"; };
+		322C86671B6272C7008BDAB5 /* JKSETDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKSETDescriptor.h; sourceTree = "<group>"; };
+		322C86681B6272C7008BDAB5 /* JKSETDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKSETDescriptor.m; sourceTree = "<group>"; };
 		32372FE51B5AA76D00C613AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		32372FE71B5AA76F00C613AE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		32372FE81B5AA8FE00C613AE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		325651431B58D4AD00368643 /* JKSETJudge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKSETJudge.h; sourceTree = "<group>"; };
-		325651441B58D4AD00368643 /* JKSETJudge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKSETJudge.m; sourceTree = "<group>"; };
 		325651461B59183100368643 /* JKSETTrainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKSETTrainer.h; sourceTree = "<group>"; };
 		325651471B59183100368643 /* JKSETTrainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKSETTrainer.m; sourceTree = "<group>"; };
 		325F3FFD1B54D788004B079E /* JKClassicSetCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JKClassicSetCardView.h; path = Views/JKClassicSetCardView.h; sourceTree = "<group>"; };
@@ -202,12 +202,12 @@
 				32A4D1921B540556006149F3 /* SETDeck.h */,
 				32A4D1931B540556006149F3 /* SETDeck.m */,
 				32A4D19F1B5408CF006149F3 /* SETCardComponents.h */,
-				325651431B58D4AD00368643 /* JKSETJudge.h */,
-				325651441B58D4AD00368643 /* JKSETJudge.m */,
 				325651461B59183100368643 /* JKSETTrainer.h */,
 				325651471B59183100368643 /* JKSETTrainer.m */,
 				32D0B83F1B5CD45A0009FBBC /* JKSETBrain.h */,
 				32D0B8401B5CD45A0009FBBC /* JKSETBrain.m */,
+				322C86671B6272C7008BDAB5 /* JKSETDescriptor.h */,
+				322C86681B6272C7008BDAB5 /* JKSETDescriptor.m */,
 				32871EFE1B5DEBEF004F57CF /* JKSETCType.h */,
 				32871EFD1B5DEBEF004F57CF /* JKSETCType.c */,
 			);
@@ -362,7 +362,7 @@
 				325F400C1B56618F004B079E /* CALayer+IndexPath.m in Sources */,
 				3273CAE61B60DF66005A24ED /* README.md in Sources */,
 				325F40021B54DEE9004B079E /* JKCardMatchingGameBrain.m in Sources */,
-				325651451B58D4AD00368643 /* JKSETJudge.m in Sources */,
+				322C86691B6272C7008BDAB5 /* JKSETDescriptor.m in Sources */,
 				32A4D1981B540556006149F3 /* SETDeck.m in Sources */,
 				325651481B59183100368643 /* JKSETTrainer.m in Sources */,
 				32871EFF1B5DEBEF004F57CF /* JKSETCType.c in Sources */,

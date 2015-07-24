@@ -22,3 +22,10 @@
 - (NSArray *)randomSET;
 
 @end
+
+// keys for miss-match details of JKCardMatchingGameBrainDidMissMatchNotification
+// The value contains a NSNumber of bool value
+NSString * const JKCardMatchingGameBrainMissMatchSymbolValueKey;
+NSString * const JKCardMatchingGameBrainMissMatchColorValueKey;
+NSString * const JKCardMatchingGameBrainMissMatchNumberValueKey;
+NSString * const JKCardMatchingGameBrainMissMatchShadingValueKey;

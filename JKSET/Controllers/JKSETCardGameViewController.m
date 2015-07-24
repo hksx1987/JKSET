@@ -10,13 +10,12 @@
 #import "SETDeck.h"
 #import "SETCard.h"
 #import "JKClassicSetCardView.h"
-#import "JKSETJudge.h"
 #import "JKSETBrain.h"
+#import "JKSETDescriptor.h"
 
 #include "JKSETCType.h"
 
-@interface JKSETCardGameViewController () <JKSETJudgeDelegate>
-@property (nonatomic, retain) JKSETJudge *judge;
+@interface JKSETCardGameViewController ()
 @end
 
 @implementation JKSETCardGameViewController
@@ -24,23 +23,15 @@
     BOOL _showHintIntroduction;
 }
 
-- (void)dealloc
-{
-    [_judge release];
-    [super dealloc];
-}
-
 #pragma mark - overriding
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _judge = [[JKSETJudge alloc] init];
-    _judge.delegate = self;
     
     JKSETBrain *brain = (JKSETBrain *)self.gameBrain;
     [brain findAllPossibleSETsWithCompletion:^(NSUInteger numberOfAllPossibleSETs) {
-        self.title = [NSString stringWithFormat:NSLocalizedString(@"Remains: %lu combinations", @"Showing { number } of possible SETs"), (unsigned long)numberOfAllPossibleSETs];
+        self.title = [JKSETDescriptor possibleSETsDescription:numberOfAllPossibleSETs];
     }];
 }
 
@@ -67,38 +58,76 @@
     return [brain autorelease];
 }
 
-- (void)didChooseCard:(Card *)card
+- (void)updateUIAfterGameRestarted
 {
-    [self.judge chooseCard:(SETCard *)card];
+    JKSETBrain *brain = (JKSETBrain *)self.gameBrain;
+    self.title = [JKSETDescriptor possibleSETsDescription:[brain maxNumberOfAllPossibleSETs]];
 }
 
-- (void)didFindAMatch
+#pragma mark - notifications
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    // make sure the game brain is initialized before using it.
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleSETMatches:)
+                                                 name:JKCardMatchingGameBrainDidFindMatchNotification
+                                               object:self.gameBrain];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleSETMissMatches:)
+                                                 name:JKCardMatchingGameBrainDidMissMatchNotification
+                                               object:self.gameBrain];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleSETGameEnded:)
+                                                 name:JKCardMatchingGameBrainDidEndGameNotification
+                                               object:self.gameBrain];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:JKCardMatchingGameBrainDidFindMatchNotification object:self.gameBrain];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:JKCardMatchingGameBrainDidMissMatchNotification object:self.gameBrain];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:JKCardMatchingGameBrainDidEndGameNotification object:self.gameBrain];
+}
+
+- (void)handleSETMatches:(NSNotification *)notification
 {
     JKSETBrain *brain = (JKSETBrain *)self.gameBrain;
     [brain findAllPossibleSETsWithCompletion:^(NSUInteger numberOfAllPossibleSETs) {
-        self.title = [NSString stringWithFormat:NSLocalizedString(@"Remains: %lu combinations", @"Showing { number } of possible SETs"), (unsigned long)numberOfAllPossibleSETs];
+        self.title = [JKSETDescriptor possibleSETsDescription:numberOfAllPossibleSETs];
     }];
 }
 
-- (void)didRestartGame
+- (void)handleSETMissMatches:(NSNotification *)notification
 {
-    JKSETBrain *brain = (JKSETBrain *)self.gameBrain;
-    [brain setupNewCalculationStatus];
-    self.title = [NSString stringWithFormat:NSLocalizedString(@"Remains: %lu combinations", @"Showing { number } of possible SETs"), (unsigned long)[brain maxNumberOfAllPossibleSETs]];
-}
-
-#pragma mark - <JKSETJudgeDelegate>
-
-- (void)judge:(JKSETJudge *)judge didReceiveMatchFailureDescription:(NSString *)failureDescription
-{
+    NSDictionary *userInfo = notification.userInfo;
+    BOOL missMatchedSymbol = [userInfo[JKCardMatchingGameBrainMissMatchSymbolValueKey] boolValue];
+    BOOL missMatchedColor = [userInfo[JKCardMatchingGameBrainMissMatchColorValueKey] boolValue];
+    BOOL missMatchedNumber = [userInfo[JKCardMatchingGameBrainMissMatchNumberValueKey] boolValue];
+    BOOL missMatchedShading = [userInfo[JKCardMatchingGameBrainMissMatchShadingValueKey] boolValue];
+    
+    NSString *missMatchDescription = [JKSETDescriptor missMatchDescriptionForSymbol:missMatchedSymbol
+                                                                              color:missMatchedColor
+                                                                             number:missMatchedNumber
+                                                                            shading:missMatchedShading];
+    
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Match Failed", @"Card game match failed alert title")
-                                                                   message:failureDescription
+                                                                   message:missMatchDescription
                                                             preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *ok = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"Card game match failed alert button")
                                                  style:UIAlertActionStyleDefault
                                                handler:nil];
     [alert addAction:ok];
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)handleSETGameEnded:(NSNotification *)notification
+{
+    JKSETBrain *brain = (JKSETBrain *)self.gameBrain;
+    [brain setupNewCalculationStatus];
 }
 
 #pragma mark - actions
@@ -110,7 +139,6 @@
     // clean all selections
     [self removeAllSelectionLayer];
     [brain cleanAllSelections];
-    [self.judge cleanAllSelections];
     
     NSArray *indexPaths = [self.collectionView indexPathsForSelectedItems];
     for (NSIndexPath *indexPath in indexPaths) {
@@ -134,7 +162,6 @@
         
         [self drawSelectionLayerAtIndexPath:indexPath];
         [brain chooseCard:card];
-        [self.judge chooseCard:(SETCard *)card];
         NSLog(@"%@", [card debugDescription]);
     }
     NSLog(@" ");

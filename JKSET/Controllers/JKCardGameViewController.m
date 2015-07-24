@@ -13,7 +13,7 @@
 #import "CALayer+IndexPath.h"
 #import "JKCalculations.h"
 
-@interface JKCardGameViewController () <JKCardMatchingGameBrainDelegate>
+@interface JKCardGameViewController ()
 @end
 
 @implementation JKCardGameViewController
@@ -28,16 +28,11 @@ static NSString * const reuseIdentifier = @"Cell";
     // if subclasss provides brain, use it
     _gameBrain = [[self brainForGame] retain];
     
-    if (_gameBrain) {
-        _gameBrain.delegate = self;
-        return;
-    }
-    
     // otherwise use the default brain
-    Deck *deck = [self deckForGame];
-    
-    _gameBrain = [[JKCardMatchingGameBrain alloc] initWithDeck:deck displayCount:[deck count] requiredMatchCount:3];
-    _gameBrain.delegate = self;
+    if (!_gameBrain) {
+        Deck *deck = [self deckForGame];
+        _gameBrain = [[JKCardMatchingGameBrain alloc] initWithDeck:deck displayCount:[deck count] requiredMatchCount:3];
+    }
 }
 
 - (void)dealloc
@@ -140,10 +135,38 @@ static NSString * const reuseIdentifier = @"Cell";
     [self didChooseCard:card];
 }
 
-#pragma mark - <JKCardMatchingGameBrainDelegate>
+#pragma mark - notifications
 
-- (void)cardMatchingGameBrain:(JKCardMatchingGameBrain *)gameBrain didFindAMatchWithCards:(NSArray *)cards
+- (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    // make sure the game brain is initialized before using it.
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleMatches:)
+                                                 name:JKCardMatchingGameBrainDidFindMatchNotification
+                                               object:self.gameBrain];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleMissMatches:)
+                                                 name:JKCardMatchingGameBrainDidMissMatchNotification
+                                               object:self.gameBrain];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleGameEnded:)
+                                                 name:JKCardMatchingGameBrainDidEndGameNotification
+                                               object:self.gameBrain];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:JKCardMatchingGameBrainDidFindMatchNotification object:self.gameBrain];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:JKCardMatchingGameBrainDidMissMatchNotification object:self.gameBrain];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:JKCardMatchingGameBrainDidEndGameNotification object:self.gameBrain];
+}
+
+- (void)handleMatches:(NSNotification *)notification
+{
+    NSArray *cards = notification.userInfo[JKCardMatchingGameBrainComparedCardsKey];
+    
     [self removeAllSelectionLayer];
     
     // use [self.collectionView indexPathsForSelectedItems] is not safe, because in some cases,
@@ -166,14 +189,10 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.collectionView performBatchUpdates:^{
         [self.gameBrain removeCards:cards];
         [self.collectionView deleteItemsAtIndexPaths:indexPaths];
-    } completion:^(BOOL finished) {
-        if (finished) {
-            [self didFindAMatch];
-        }
-    }];
+    } completion:nil];
 }
 
-- (void)cardMatchingGameBrain:(JKCardMatchingGameBrain *)gameBrain didFailAMatchWithCards:(NSArray *)cards
+- (void)handleMissMatches:(NSNotification *)notification
 {
     [self removeAllSelectionLayer];
     
@@ -181,22 +200,18 @@ static NSString * const reuseIdentifier = @"Cell";
     for (NSIndexPath *indexPath in indexPaths) {
         [self.collectionView deselectItemAtIndexPath:indexPath animated:YES];
     }
-    
-    [self didFailAMatch];
 }
 
-- (void)cardMatchingGameBrainDidEndGame:(JKCardMatchingGameBrain *)gameBrain
+- (void)handleGameEnded:(NSNotification *)notification
 {
     UIAlertController *alert =[UIAlertController alertControllerWithTitle:NSLocalizedString(@"Congratulation", @"Game finished title")
                                                                   message:NSLocalizedString(@"Try one more?", @"Game finished message")
                                                            preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *go = [UIAlertAction actionWithTitle:NSLocalizedString(@"Go", @"Game finished button")
-                                                 style:UIAlertActionStyleDefault
-                                               handler:^(UIAlertAction *action) {
-        Deck *deck = [self deckForGame];
-        [self.gameBrain startNewGameWithNewDeck:deck];
-        [self.collectionView reloadData];
-        [self didRestartGame];
+    UIAlertAction *go = [UIAlertAction actionWithTitle:NSLocalizedString(@"Go", @"Game finished button") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+       Deck *deck = [self deckForGame];
+       [self.gameBrain startNewGameWithNewDeck:deck];
+       [self.collectionView reloadData];
+       [self updateUIAfterGameRestarted];
     }];
     [alert addAction:go];
     [self presentViewController:alert animated:YES completion:nil];
@@ -287,8 +302,6 @@ static NSString * const reuseIdentifier = @"Cell";
 - (JKCardMatchingGameBrain *)brainForGame { return nil; }
 
 - (void)didChooseCard:(Card *)card {}
-- (void)didFindAMatch {}
-- (void)didFailAMatch {}
-- (void)didRestartGame {}
+- (void)updateUIAfterGameRestarted {}
 
 @end

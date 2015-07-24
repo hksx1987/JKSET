@@ -9,27 +9,29 @@
 #import "JKSETTrainingViewController.h"
 #import "JKClassicSetCardView.h"
 #import "JKCalculations.h"
-#import "JKSETJudge.h"
+#import "JKSETBrain.h"
 #import "JKSETTrainer.h"
 #import "SETCard.h"
 #import "JKSetCardView+equatableCard.h"
+#import "JKSETDescriptor.h"
 
-@interface JKSETTrainingViewController () <JKSETJudgeDelegate>
+@interface JKSETTrainingViewController ()
 @property (retain, nonatomic) IBOutlet UILabel *guideLabel;
-@property (nonatomic, retain) JKSETJudge *judge;
+@property (nonatomic, retain) JKSETBrain *brain;
 @property (nonatomic, retain) JKSETTrainer *trainer;
 @end
 
 @implementation JKSETTrainingViewController
 {
     CGSize _cellSize;
+    UIView *_selectedView;
 }
 
 - (void)dealloc
 {
     NSLog(@"test view controller deallocated");
     [_guideLabel release];
-    [_judge release];
+    [_brain release];
     [_trainer release];
     [super dealloc];
 }
@@ -39,8 +41,7 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     _trainer = [[JKSETTrainer alloc] init];
-    _judge = [[JKSETJudge alloc] init];
-    _judge.delegate = self;
+    _brain = [[JKSETBrain alloc] initWithDeck:nil displayCount:0 requiredMatchCount:3];
     
     _cellSize = defaultCellSizeInRect(self.view.bounds);
     
@@ -78,7 +79,7 @@
         if (i == 0 || i == 1) {
             SETCard *card = candidates[i];
             [cardView setSymbol:card.symbol color:card.color number:card.number shading:card.shading];
-            [self.judge chooseCard: card];
+            [self.brain chooseCard: card];
         } else if (i == 2) {
             SETCard *card = [[SETCard alloc] initWithBlankCard];
             [cardView setSymbol:card.symbol color:card.color number:card.number shading:card.shading];
@@ -104,22 +105,11 @@
     
     if (location.y > CGRectGetHeight(containerView.bounds) / 2.0) {
         UIView *testView = [containerView hitTest:location withEvent:nil];
+        _selectedView = testView;
         if ([testView isKindOfClass:[JKClassicSetCardView class]]) {
             JKClassicSetCardView *cardView = (JKClassicSetCardView *)testView;
             SETCard *card = [cardView equatableSETCard];
-            // if found a match
-            if ([self.judge chooseCard:card]) {
-                UIView *snapView = [cardView snapshotViewAfterScreenUpdates:NO];
-                snapView.frame = cardView.frame;
-                [self.view addSubview:snapView];
-                [UIView animateWithDuration:0.5 animations:^{
-                    snapView.transform = CGAffineTransformMakeScale(1.8, 1.8);
-                    snapView.alpha = 0.0;
-                } completion:^(BOOL finished) {
-                    [snapView removeFromSuperview];
-                    [self resetTest];
-                }];
-            }
+            [self.brain chooseCard:card];
         }
     }
 }
@@ -145,19 +135,62 @@
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - <JKSETJudgeDelegate>
+#pragma mark - notifications
 
-- (void)judge:(JKSETJudge *)judge didReceiveMatchFailureDescription:(NSString *)failureDescription
+- (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleSETMatch:)
+                                                 name:JKCardMatchingGameBrainDidFindMatchNotification
+                                               object:self.brain];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleSETMissMatch:)
+                                                 name:JKCardMatchingGameBrainDidMissMatchNotification
+                                               object:self.brain];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:JKCardMatchingGameBrainDidFindMatchNotification object:self.brain];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:JKCardMatchingGameBrainDidMissMatchNotification object:self.brain];
+}
+
+- (void)handleSETMatch:(NSNotification *)notification
+{
+    UIView *snapView = [_selectedView snapshotViewAfterScreenUpdates:NO];
+    snapView.frame = _selectedView.frame;
+    [self.view addSubview:snapView];
+    [UIView animateWithDuration:0.5 animations:^{
+        snapView.transform = CGAffineTransformMakeScale(1.8, 1.8);
+        snapView.alpha = 0.0;
+    } completion:^(BOOL finished) {
+        [snapView removeFromSuperview];
+        [self resetTest];
+    }];
+}
+
+- (void)handleSETMissMatch:(NSNotification *)notification
+{
+    NSDictionary *userInfo = notification.userInfo;
+    BOOL missMatchedSymbol = [userInfo[JKCardMatchingGameBrainMissMatchSymbolValueKey] boolValue];
+    BOOL missMatchedColor = [userInfo[JKCardMatchingGameBrainMissMatchColorValueKey] boolValue];
+    BOOL missMatchedNumber = [userInfo[JKCardMatchingGameBrainMissMatchNumberValueKey] boolValue];
+    BOOL missMatchedShading = [userInfo[JKCardMatchingGameBrainMissMatchShadingValueKey] boolValue];
+    
+    NSString *missMatchDescription = [JKSETDescriptor missMatchDescriptionForSymbol:missMatchedSymbol
+                                                                              color:missMatchedColor
+                                                                             number:missMatchedNumber
+                                                                            shading:missMatchedShading];
+    
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Training Failed", @"Training match failed alert title")
-                                                                   message:failureDescription
+                                                                   message:missMatchDescription
                                                             preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *ok = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK Button", @"Traning match failed alert button")
-                                                 style:UIAlertActionStyleDefault
-                                               handler:^(UIAlertAction *action) {
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK Button", @"Traning match failed alert button") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         NSArray *candidates = [self.trainer candidateCards];
         for (SETCard *card in candidates) {
-            [self.judge chooseCard:card];
+            [self.brain chooseCard:card];
         }
     }];
     [alert addAction:ok];

@@ -10,21 +10,17 @@
 
 @class Card, Deck, JKCardMatchingGameBrain;
 
-
-@protocol JKCardMatchingGameBrainDelegate <NSObject>;
-- (void)cardMatchingGameBrain:(JKCardMatchingGameBrain *)gameBrain didFindAMatchWithCards:(NSArray *)cards; // contains array of Card objects
-- (void)cardMatchingGameBrain:(JKCardMatchingGameBrain *)gameBrain didFailAMatchWithCards:(NSArray *)cards;
-- (void)cardMatchingGameBrainDidEndGame:(JKCardMatchingGameBrain *)gameBrain;
-@end
-
-
 /* Abstract class */
 @interface JKCardMatchingGameBrain : NSObject
 
 @property (nonatomic, readonly) Deck *deck;
 @property (nonatomic, readonly) NSArray *displayedCards; // current cards for displaying
 @property (nonatomic, readonly) NSUInteger numberOfCards; // for displaying / displayed
-@property (nonatomic, assign) id <JKCardMatchingGameBrainDelegate> delegate;
+@property (nonatomic, readonly) NSMutableArray *chosenCards;
+
+@property (nonatomic, readonly) NSUInteger displayCount;
+@property (nonatomic, readonly) NSUInteger matchCount;
+@property (nonatomic, readonly) NSInteger score;
 
 /* designated initalizer */
 - (instancetype)initWithDeck:(Deck *)deck
@@ -42,4 +38,16 @@
 - (NSUInteger)indexOfCard:(Card *)card;
 - (NSArray *)lastRemovedCards;
 
+// override
+// the default implementation will send JKCardMatchingGameBrainDidEndGameNotification
+- (void)didOutOfCards;
+
 @end
+
+NSString * const JKCardMatchingGameBrainDidFindMatchNotification;
+NSString * const JKCardMatchingGameBrainDidMissMatchNotification;
+NSString * const JKCardMatchingGameBrainDidEndGameNotification;
+
+// the key for userInfo of notification
+// the value is NSArray of cards for game matching. (success or failure)
+NSString * const JKCardMatchingGameBrainComparedCardsKey;

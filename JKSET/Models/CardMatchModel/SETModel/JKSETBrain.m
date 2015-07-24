@@ -13,9 +13,15 @@
 @interface JKSETBrain()
 @end
 
+NSString * const JKCardMatchingGameBrainMissMatchSymbolValueKey = @"JKCardMatchingGameBrainMissMatchSymbolValueKey";
+NSString * const JKCardMatchingGameBrainMissMatchColorValueKey = @"JKCardMatchingGameBrainMissMatchColorValueKey";
+NSString * const JKCardMatchingGameBrainMissMatchNumberValueKey = @"JKCardMatchingGameBrainMissMatchNumberValueKey";
+NSString * const JKCardMatchingGameBrainMissMatchShadingValueKey = @"JKCardMatchingGameBrainMissMatchShadingValueKey";
+
 @implementation JKSETBrain
 {
     BOOL _isSETCTypeSetup;
+    BOOL _gameShouldEnd;
 }
 
 - (void)setupNewCalculationStatus
@@ -53,37 +59,111 @@
         
         CTRemoveCombination(comb, ^(int getPossibleSETsCount) {
             
-            if (!getPossibleSETsCount) {
-                [self.delegate cardMatchingGameBrainDidEndGame:self];
-            }
-            
+            // handle results first
             if (completion) {
                 completion(getPossibleSETsCount);
+            }
+            
+            // then handle ending
+            if (!getPossibleSETsCount) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:JKCardMatchingGameBrainDidEndGameNotification
+                                                                    object:self
+                                                                  userInfo:nil];
             }
         });
     }
 }
 
+// The card object in rendomSET array does not have to be the identical card from gameBrain.cards' array
+// because the logic is comparing the card's values rather than it's reference.
 - (NSArray *)randomSET
 {
     CTSETCombination comb = CTGetRandomCombination();
     
-    // Here I switch back to get original SET cards instead of new cards,
-    // because they have exact same value, so it is easy to track.
-    // This step is important because a lot of other changes are related to
-    // the original cards.
-    NSMutableArray *originalRandomSET = [NSMutableArray arrayWithCapacity:3];
+    NSMutableArray *randomSET = [NSMutableArray arrayWithCapacity:3];
     for (int i = 0; i < 3; ++i) {
         CTSETCard ct_card = comb.cards[i];
-        SETCard *newCard = [[SETCard alloc] initWithSymbol:ct_card.symbol color:ct_card.color number:ct_card.number shading:ct_card.shading];
-        
-        NSUInteger i = [self indexOfCard:newCard];
-        Card *originalCard = [self cardAtIndex:i];
-        [originalRandomSET addObject:originalCard];
-        [newCard release];
+        SETCard *randomCard = [[SETCard alloc] initWithSymbol:ct_card.symbol color:ct_card.color number:ct_card.number shading:ct_card.shading];
+        [randomSET addObject:randomCard];
+        [randomCard release];
     }
     
-    return [[originalRandomSET copy] autorelease];
+    return [[randomSET copy] autorelease];
+}
+
+// override
+- (void)chooseCard:(SETCard *)card
+{
+    if (!card.isMatched) {
+        if (card.isChosen) {
+            card.isChosen = NO;
+            if ([self.chosenCards containsObject: card]) {
+                [self.chosenCards removeObject: card];
+            }
+        } else {
+            card.isChosen = YES;
+            
+            if (self.chosenCards.count < self.matchCount-1) {
+                if (![self.chosenCards containsObject:card]) {
+                    [self.chosenCards addObject: card];
+                }
+            } else {
+                /* try a match */
+                BOOL isSymbolMatched, isColorMatched, isNumberMatched, isShadingMatched;
+                
+                /* match failed */
+                if (![card match:self.chosenCards
+                     symbolMatch:&isSymbolMatched
+                      colorMatch:&isColorMatched
+                     numberMatch:&isNumberMatched
+                    shadingMatch:&isShadingMatched]) {
+                    
+                    NSLog(@"match failed");
+                    NSMutableArray *failedCards = [NSMutableArray arrayWithArray:self.chosenCards];
+                    [failedCards addObject:card];
+                    
+                    for (Card *card in failedCards) {
+                        card.isChosen = NO;
+                    }
+                    
+                    // post notification
+                    NSDictionary *userInfo = @{ JKCardMatchingGameBrainComparedCardsKey : [[failedCards copy] autorelease],
+                                                JKCardMatchingGameBrainMissMatchSymbolValueKey : @(!isSymbolMatched),
+                                                JKCardMatchingGameBrainMissMatchColorValueKey : @(!isColorMatched),
+                                                JKCardMatchingGameBrainMissMatchNumberValueKey : @(!isNumberMatched),
+                                                JKCardMatchingGameBrainMissMatchShadingValueKey : @(!isShadingMatched) };
+                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:JKCardMatchingGameBrainDidMissMatchNotification
+                                                                        object:self userInfo:userInfo];
+                    
+                    [self.chosenCards removeAllObjects];
+                }
+                /* found a match */
+                else {
+                    NSLog(@"Find a match!");
+                    
+                    NSMutableArray *matchedCards = [NSMutableArray arrayWithArray:self.chosenCards];
+                    [matchedCards addObject:card];
+                    
+                    for (Card *card in matchedCards) {
+                        card.isMatched = YES;
+                    }
+                    
+                    // post notification
+                    NSDictionary *userInfo = @{ JKCardMatchingGameBrainComparedCardsKey : [[matchedCards copy] autorelease] };
+                    [[NSNotificationCenter defaultCenter] postNotificationName:JKCardMatchingGameBrainDidFindMatchNotification
+                                                                        object:self userInfo:userInfo];
+                    
+                    [self.chosenCards removeAllObjects];
+                }
+            }
+        }
+    }
+}
+
+- (void)didOutOfCards
+{
+    // make empty implementation, so super class will not post didEndGame notification.
 }
 
 @end
