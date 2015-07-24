@@ -21,12 +21,6 @@ static CGRect two_right_rect; // the right rect for another of two symbols
 static CGRect three_left_rect; // ...
 static CGRect three_right_rect; // ...
 
-- (void)dealloc
-{
-    [_card release];
-    [super dealloc];
-}
-
 - (instancetype)initWithFrame:(CGRect)frame cornerColor:(UIColor *)cornerColor
 {
     self = [super initWithFrame:frame];
@@ -79,12 +73,12 @@ static CGRect three_right_rect; // ...
     // color to cover this, but I didn't show it here.
 }
 
-- (void)setCard:(SETCard *)card
+- (void)setSymbol:(SETSymbol)symbol color:(SETColor)color number:(SETNumber)number shading:(SETShading)shading
 {
-    if (_card != card) {
-        [_card release];
-        _card = [card retain];
-    }
+    self.symbol = symbol;
+    self.color = color;
+    self.number = number;
+    self.shading = shading;
     [self setNeedsDisplay];
 }
 
@@ -166,11 +160,11 @@ static CGRect three_right_rect; // ...
 {
     UIColor *symbolColor = nil;
     
-    if (self.card.color == SETFirstValue) {
+    if (self.color == SETFirstValue) {
         symbolColor = [self firstSymbolColor];
-    } else if (self.card.color == SETSecondValue) {
+    } else if (self.color == SETSecondValue) {
         symbolColor = [self secondSymbolColor];
-    } else if (self.card.color == SETThirdValue) {
+    } else if (self.color == SETThirdValue) {
         symbolColor = [self thirdSymbolColor];
     }
     
@@ -181,11 +175,11 @@ static CGRect three_right_rect; // ...
 {
     UIBezierPath *symbolPath = nil;
     
-    if (self.card.symbol == SETFirstValue) {
+    if (self.symbol == SETFirstValue) {
         symbolPath = [self firstSymbolPathInRect:rect];
-    } else if (self.card.symbol == SETSecondValue) {
+    } else if (self.symbol == SETSecondValue) {
         symbolPath = [self secondSymbolPathInRect:rect];
-    } else if (self.card.symbol == SETThirdValue) {
+    } else if (self.symbol == SETThirdValue) {
         symbolPath = [self thirdSymbolPathInRect:rect];
     }
     
@@ -198,12 +192,12 @@ static CGRect three_right_rect; // ...
 {
     NSArray *symbolRects = nil;
     
-    if (self.card.number == SETFirstValue) {
+    if (self.number == SETFirstValue) {
         symbolRects = @[[NSValue valueWithCGRect:the_mid_rect]];
-    } else if (self.card.number == SETSecondValue) {
+    } else if (self.number == SETSecondValue) {
         symbolRects = @[[NSValue valueWithCGRect:two_left_rect],
                         [NSValue valueWithCGRect:two_right_rect]];
-    } else if (self.card.number == SETThirdValue) {
+    } else if (self.number == SETThirdValue) {
         symbolRects = @[[NSValue valueWithCGRect:three_left_rect],
                         [NSValue valueWithCGRect:the_mid_rect],
                         [NSValue valueWithCGRect:three_right_rect]];
@@ -216,11 +210,11 @@ static CGRect three_right_rect; // ...
 // there are 3 effects: outlined(stroke), solid(filled), striped
 - (void)drawSymbolPath:(UIBezierPath *)symbolPath inRect:(CGRect)rect
 {
-    if (self.card.shading == SETFirstValue) {
+    if (self.shading == SETFirstValue) {
         [symbolPath stroke];
-    } else if (self.card.shading == SETSecondValue) {
+    } else if (self.shading == SETSecondValue) {
         [symbolPath fill];
-    } else if (self.card.shading == SETThirdValue) {
+    } else if (self.shading == SETThirdValue) {
         // make stripe effect
         CGContextRef context = UIGraphicsGetCurrentContext();
         [symbolPath stroke];
@@ -246,8 +240,8 @@ static CGRect three_right_rect; // ...
 
 - (BOOL)isIncompleteComponents
 {
-    return self.card.color == SETNoneValue || self.card.symbol == SETNoneValue ||
-    self.card.number == SETNoneValue || self.card.shading == SETNoneValue;
+    return self.color == SETNoneValue || self.symbol == SETNoneValue ||
+    self.number == SETNoneValue || self.shading == SETNoneValue;
 }
 
 - (void)drawBlankCardInRect:(CGRect)rect

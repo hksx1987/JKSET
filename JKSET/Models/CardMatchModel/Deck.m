@@ -33,7 +33,7 @@
     if (self.cards.count) {
         u_int32_t i = arc4random() % self.cards.count;
         Card *card = [self.cards[i] retain];
-        [self.cards removeObjectIdenticalTo:card];
+        [self.cards removeObject:card];
         return [card autorelease];
     }
     return nil;

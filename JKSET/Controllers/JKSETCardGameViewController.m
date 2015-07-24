@@ -56,7 +56,7 @@
     JKClassicSetCardView *cardView = [[JKClassicSetCardView alloc] initWithFrame:CGRectZero cornerColor:self.collectionView.backgroundColor];
     UICollectionViewLayoutAttributes *layoutAttributes = [self.collectionView layoutAttributesForItemAtIndexPath:indexPath];
     cardView.frame = layoutAttributes.bounds;
-    cardView.card = setCard;
+    [cardView setSymbol:setCard.symbol color:setCard.color number:setCard.number shading:setCard.shading];
     return [cardView autorelease];
 }
 

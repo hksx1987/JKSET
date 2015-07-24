@@ -35,7 +35,7 @@
 {
     // cancel selection
     if ([self.chosenCards containsObject:card]) {
-        [self.chosenCards removeObjectIdenticalTo:card];
+        [self.chosenCards removeObject:card];
         return NO;
     } else {
         // select new card, and not enough for a match

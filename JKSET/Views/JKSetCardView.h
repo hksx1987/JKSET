@@ -7,18 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SETCardComponents.h"
 @class SETCard;
 
 /* Abstract class */
 @interface JKSetCardView : UIView
-
-/*! Set card for JKSetCardView after the view initialized.
- *  color       three different color for displayed symbols (determined by subclass)
- *  symbol      three kind of different shapes for displayed symbols (determined by subclass)
- *  number      the number of symbols: one symbol, two symbols, three symbols (fixed)
- *  shading     this is how symbol looks - 1: outlined, 2: solid, 3: striped (fixed)
- */
-@property (nonatomic, retain) SETCard *card;
 
 /*!
  * Designated Initializer
@@ -27,6 +20,19 @@
  * \returns An initialized JKSetCardView object or nil if the object couldn't be created.
  */
 - (instancetype)initWithFrame:(CGRect)frame cornerColor:(UIColor *)cornerColor;
+
+@property (nonatomic) SETSymbol symbol;
+@property (nonatomic) SETColor color;
+@property (nonatomic) SETNumber number;
+@property (nonatomic) SETShading shading;
+
+/*! Convenient method to set all values for JKSetCardView and redraw the view, call this after the view is initialized.
+ *  \param color       three different color for displayed symbols (determined by subclass)
+ *  \param symbol      three kind of different shapes for displayed symbols (determined by subclass)
+ *  \param number      the number of symbols: one symbol, two symbols, three symbols (fixed)
+ *  \param shading     this is how symbol looks - 1: outlined, 2: solid, 3: striped (fixed)
+ */
+- (void)setSymbol:(SETSymbol)symbol color:(SETColor)color number:(SETNumber)number shading:(SETShading)shading;
 
 
 // subclass MUST override these

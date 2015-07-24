@@ -12,6 +12,7 @@
 #import "JKSETJudge.h"
 #import "JKSETTrainer.h"
 #import "SETCard.h"
+#import "JKSetCardView+equatableCard.h"
 
 @interface JKSETTrainingViewController () <JKSETJudgeDelegate>
 @property (retain, nonatomic) IBOutlet UILabel *guideLabel;
@@ -76,15 +77,15 @@
         
         if (i == 0 || i == 1) {
             SETCard *card = candidates[i];
-            cardView.card = card;
+            [cardView setSymbol:card.symbol color:card.color number:card.number shading:card.shading];
             [self.judge chooseCard: card];
         } else if (i == 2) {
             SETCard *card = [[SETCard alloc] initWithBlankCard];
-            cardView.card = card;
+            [cardView setSymbol:card.symbol color:card.color number:card.number shading:card.shading];
             [card release];
         } else {
             SETCard *card = options[i-3];
-            cardView.card = card;
+            [cardView setSymbol:card.symbol color:card.color number:card.number shading:card.shading];
         }
 
         [self.view addSubview:cardView];
@@ -105,7 +106,7 @@
         UIView *testView = [containerView hitTest:location withEvent:nil];
         if ([testView isKindOfClass:[JKClassicSetCardView class]]) {
             JKClassicSetCardView *cardView = (JKClassicSetCardView *)testView;
-            SETCard *card = cardView.card;
+            SETCard *card = [cardView equatableSETCard];
             // if found a match
             if ([self.judge chooseCard:card]) {
                 UIView *snapView = [cardView snapshotViewAfterScreenUpdates:NO];

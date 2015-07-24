@@ -85,7 +85,7 @@
         if (card.isChosen) {
             card.isChosen = NO;
             if ([self.chosenCards containsObject: card]) {
-                [self.chosenCards removeObjectIdenticalTo: card];
+                [self.chosenCards removeObject: card];
             }
         } else {
             card.isChosen = YES;

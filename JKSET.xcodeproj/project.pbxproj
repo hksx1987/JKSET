@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		322C86661B6255A4008BDAB5 /* JKSetCardView+EquatableCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 322C86651B6255A4008BDAB5 /* JKSetCardView+EquatableCard.m */; };
 		32372FE41B5AA76D00C613AE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 32372FE61B5AA76D00C613AE /* Localizable.strings */; };
 		325651451B58D4AD00368643 /* JKSETJudge.m in Sources */ = {isa = PBXBuildFile; fileRef = 325651441B58D4AD00368643 /* JKSETJudge.m */; };
 		325651481B59183100368643 /* JKSETTrainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 325651471B59183100368643 /* JKSETTrainer.m */; };
@@ -44,6 +45,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		322C86641B6255A4008BDAB5 /* JKSetCardView+EquatableCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "JKSetCardView+EquatableCard.h"; path = "Views/JKSetCardView+EquatableCard.h"; sourceTree = "<group>"; };
+		322C86651B6255A4008BDAB5 /* JKSetCardView+EquatableCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "JKSetCardView+EquatableCard.m"; path = "Views/JKSetCardView+EquatableCard.m"; sourceTree = "<group>"; };
 		32372FE51B5AA76D00C613AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		32372FE71B5AA76F00C613AE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		32372FE81B5AA8FE00C613AE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -229,6 +232,8 @@
 			children = (
 				32A4D19A1B5406D4006149F3 /* JKSetCardView.h */,
 				32A4D19B1B5406D4006149F3 /* JKSetCardView.m */,
+				322C86641B6255A4008BDAB5 /* JKSetCardView+EquatableCard.h */,
+				322C86651B6255A4008BDAB5 /* JKSetCardView+EquatableCard.m */,
 				325F3FFD1B54D788004B079E /* JKClassicSetCardView.h */,
 				325F3FFE1B54D788004B079E /* JKClassicSetCardView.m */,
 				325F400A1B56618F004B079E /* CALayer+IndexPath.h */,
@@ -352,6 +357,7 @@
 				32A4D1661B540501006149F3 /* AppDelegate.m in Sources */,
 				32A4D1631B540501006149F3 /* main.m in Sources */,
 				32D0B8411B5CD45A0009FBBC /* JKSETBrain.m in Sources */,
+				322C86661B6255A4008BDAB5 /* JKSetCardView+EquatableCard.m in Sources */,
 				32A4D1961B540556006149F3 /* Deck.m in Sources */,
 				325F400C1B56618F004B079E /* CALayer+IndexPath.m in Sources */,
 				3273CAE61B60DF66005A24ED /* README.md in Sources */,
