@@ -69,7 +69,7 @@ Deck
 
 JKCardMatchingGameBrain
 
-  -The logic of card matching game. Handles basic cards dealing and matching. It can be added new APIs for more features and complexity. It’s also the generic class that can be used for any card matching game and it contains delegate callback for receiving matching results.
+  -The logic of card matching game. Handles basic cards dealing and matching. It can be added new APIs for more features and complexity. It’s also the generic class that can be used for any card matching game and it contains notifications for receiving matching results.
 
 
 SETCard
@@ -82,11 +82,6 @@ SETDeck
   -The subclass of Deck. It generates 81 SET cards for SET game.
 
 
-JKSETJudge
-
-  -Additional class for giving user nice description feedback about miss-match details.(Using delegate callback)
-
-
 JKSETTrainer
 
   -Additional class for helping user practice the game.
@@ -94,7 +89,7 @@ JKSETTrainer
 
 JKSETBrain
 
-  -The subclass of JKCardMatchingGameBrain and handle specific SET game details.
+  -The subclass of JKCardMatchingGameBrain and handle specific SET game details, like giving user nice description feedback about miss-match details.
 
 
 JKSETCType
